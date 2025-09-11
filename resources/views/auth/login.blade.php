@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Basic - Pages | Vuexy - Bootstrap Admin Template</title>
+    <title>Login ApotekKu</title>
 
     <meta name="description" content="" />
 
@@ -105,8 +105,8 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-1">Selamat Datang!</h4>
-              <p class="mb-6">Silahkan login untuk melihat halaman ApotekKu.</p>
+              <h4 class="mb-1">Selamat Datang</h4>
+              <p class="mb-6">Silahkan login untuk melihat ApotekKu</p>
 
               <form id="formAuthentication" class="mb-4" action="{{ route('login') }}" method="POST">
                 @csrf

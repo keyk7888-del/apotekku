@@ -2,15 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [App\Http\Controllers\FormTamuController::class, 'index'])->name('form.index');
-
-
 Route::group([
     'middleware' => ['auth']
 ], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 });
-Auth::routes();
+Route::get('/', [App\Http\Controllers\PelangganController::class, 'index'])->name('pelanggan.index');
+Route::post('/', [App\Http\Controllers\PelangganController::class, 'store'])->name('pelanggan.store');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false,
+    'confirm' => false,
+]);
