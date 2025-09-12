@@ -6,6 +6,12 @@ Route::group([
     'middleware' => ['auth']
 ], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::resource('/obat', App\Http\Controllers\ObatController::class);
+    Route::resource('/category', \App\http\Controllers\CategoryController::class);
+
+    Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
+    Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
 });
 Route::get('/', [App\Http\Controllers\PelangganController::class, 'index'])->name('pelanggan.index');
 Route::post('/', [App\Http\Controllers\PelangganController::class, 'store'])->name('pelanggan.store');
