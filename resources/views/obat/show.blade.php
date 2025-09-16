@@ -13,9 +13,24 @@
             </tr>
        
             <tr>
-                <th width="25%">Nama</th>
+                <th width="25%">Nama Obat</th>
                 <th width="10%">:</th>
-                <td>{{ $obat->nama }}</td>
+                <td>{{ $obat->nama_obat }}</td>
+            </tr>
+             <tr>
+                <th width="25%">Category_id</th>
+                <th width="10%">:</th>
+                <td>{{ $obat->category_id }}</td>
+            </tr>
+             <tr>
+                <th width="25%">Supplier_id</th>
+                <th width="10%">:</th>
+                <td>{{ $obat->supplier_id }}</td>
+            </tr>
+             <tr>
+                <th width="25%">Jenis</th>
+                <th width="10%">:</th>
+                <td>{{ $obat->jenis }}</td>
             </tr>
             <tr>
                 <th width="25%">Deskripsi</th>
@@ -28,20 +43,19 @@
                 <td>{{ $obat->harga }}</td>
             </tr>
             <tr>
-                <th width="25%">Images</th>
-                <th width="10%">:</th>
-                <td>{{ $obat->images}}</td>
-            </tr>
-        
-            <tr>
-                <th width="25%">Category_id</th>
-                <th width="10%">:</th>
-                <td>{{ $obat->category_id }}</td>
-            </tr>
-            <tr>
                 <th width="25%">Stok Obat</th>
                 <th width="10%">:</th>
                 <td>{{ $obat->stok_obat }}</td>
+            </tr>
+            <tr>
+                <th width="25%">Expired Date</th>
+                <th width="10%">:</th>
+                <td>{{ $obat->expired_date }}</td>
+            </tr>
+            <tr>
+                <th width="25%">Images</th>
+                <th width="10%">:</th>
+                <td>{{ $obat->images}}</td>
             </tr>
             <tr>
                 <th width="25%">Dibuat pada</th>

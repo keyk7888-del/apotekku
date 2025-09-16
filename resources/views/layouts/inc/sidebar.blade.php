@@ -36,15 +36,22 @@
 
         <li class="menu-item">
             <a href="{{ route('obat.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-users-group"></i>
+                <i class="menu-icon tf-icons ti ti-first-aid-kit"></i>
                 Obat
             </a>
         </li>
 
         <li class="menu-item">
             <a href="{{ route('category.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-users-group"></i>
+               <i class="menu-icon tf-icons ti ti-folders"></i>
                 Category
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="{{ route('suppliers.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                Suppliers
             </a>
         </li>
 

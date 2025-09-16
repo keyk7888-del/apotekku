@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Obat;
 use App\Models\Category;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -12,25 +13,30 @@ class ObatController extends Controller
 {
     public function index()
     {
-        $obat = Obat::with('category')->orderBy('created_at', 'desc')->get();
+        //$obat = Obat::with('category')->orderBy('created_at', 'desc')->get();
+        $obat = Obat::with(['category','supplier'])->orderBy('created_at', 'desc')->get();
         return view('obat.index', compact('obat'));
     }
 
     public function create()
     {
-        $categories = Category::select('id', 'nama')->orderBy('nama')->get();
-        return view('obat.create', compact('categories'));
+        $categories = Category::orderBy('nama')->get();
+        $suppliers = Supplier::orderBy('nama')->get();
+        return view('obat.create', compact('categories', 'suppliers'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|min:3|max:64',
+            'nama_obat' => 'required|min:3|max:64',
+            'category_id' => 'nullable|exists:categories,id',
+            'supplier_id' => 'nullable|exists:suppliers,id',
+            'jenis' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
-            'images' => 'required|image',
-            'category_id' => 'required',
             'stok_obat' => 'required',
+            'expired_date' => 'required',
+            'images' => 'nullable|image',
         ]);
 
         $images = $request->file('images');
@@ -39,12 +45,15 @@ class ObatController extends Controller
         Storage::putFileAs($directory, $images, $filename);
 
         Obat::create([
-            'nama' => $request->nama,
+            'nama_obat' => $request->nama_obat,
+            'category_id' => $request->category_id,
+            'supplier_id' => $request->supplier_id,
+            'jenis' => $request->jenis,
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
-            'images' => $filename,
-            'category_id' => $request->category_id,
             'stok_obat' => $request->stok_obat,
+            'expired_date' => $request->expired_date,
+            'images' => $filename,   
         ]);
 
         return redirect()->route('obat.index')->with('success', 'Obat berhasil ditambahkan!');
@@ -58,25 +67,33 @@ class ObatController extends Controller
 
     public function edit(string $id)
     {
+        //$obat = Obat::findOrFail($id);
+        //$categories = Category::orderBy('nama', 'asc')->get();
+        //return view('obat.edit', compact('obat', 'categories'));
         $obat = Obat::findOrFail($id);
         $categories = Category::orderBy('nama', 'asc')->get();
-        return view('obat.edit', compact('obat', 'categories'));
+        $suppliers  = Supplier::orderBy('nama', 'asc')->get();
+
+        return view('obat.edit', compact('obat', 'categories', 'suppliers'));
     }
 
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama' => 'required|min:3|max:64',
+            'nama_obat' => 'required|min:3|max:64',
+            'category_id' => 'required',
+            'supplier_id' => 'required',
+            'jenis' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
-            'images' => 'nullable|image',
-            'category_id' => 'required',
             'stok_obat' => 'required',
+            'expired_date' => 'required',
+            'images' => 'nullable|image',
         ]);
 
         $obat = Obat::findOrFail($id);
 
-        $data = $request->only(['nama','deskripsi','harga','category_id','stok_obat']);
+        $data = $request->only(['nama_obat','category_id','supplier_id','jenis','deskripsi','harga','stok_obat','expired_date','images']);
 
         if ($request->hasFile('images')) {
             $images = $request->file('images');

@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container">
-        <h3> Add New Category</h3>
+        <h3>Tambah Category</h3>
 
         <div class="row">
             <div class="col-md-6">
-                <form action="{{ route('category.store') }}" method="POST">
+                <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">>
                     @csrf
 
                         <div class="card card-body">

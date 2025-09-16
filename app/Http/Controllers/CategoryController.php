@@ -23,7 +23,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        $categories = Category::all(); // ambil semua data supplier
+        return view('categories.create', compact('categories'));
     }
 
     /**
@@ -34,11 +35,21 @@ class CategoryController extends Controller
         $request->validate([
             'nama' => 'required',
             'deskripsi' => 'required',
-            'images' => 'required',
+            'images' => 'nullable|images',
+        ]);
+        $images = $request->file('images');
+        $directory = 'images/';
+        $filename = Str::random(10) . '.' . $images->getClientOriginalExtension();
+        Storage::putFileAs($directory, $images, $filename);
+
+        Category::create([
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'images' => $filename,   
         ]);
 
-        Category::create($request->all());
-        return redirect()->route('category.index');
+        //Category::create($request->all());
+        return redirect()->route('categories.index')->with('success', 'category berhasil ditambahkan!');
 
     }
 
@@ -47,8 +58,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $category = Category::find($id);
-        return view('categories.show', compact('category'));
+        $categories = Category::find($id);
+        return view('categories.show', compact('categories'));
     }
 
     /**
@@ -64,7 +75,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'deskripsi' => 'required',
+            'images' => 'nullable|images',
+        ]);
+        $images = $request->file('images');
+        $directory = 'images/';
+        $filename = Str::random(10) . '.' . $images->getClientOriginalExtension();
+        Storage::putFileAs($directory, $images, $filename);
+
+        Category::create([
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'images' => $filename,   
+        ]);
+        return redirect()->route('categories.index')->with('success', 'categories berhasil diupdate!');
     }
 
     /**

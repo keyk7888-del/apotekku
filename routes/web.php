@@ -9,6 +9,7 @@ Route::group([
 
     Route::resource('/obat', App\Http\Controllers\ObatController::class);
     Route::resource('/category', \App\http\Controllers\CategoryController::class);
+    Route::resource('/suppliers', \App\http\Controllers\SuppliersController::class);
 
     Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
     Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');

@@ -4,8 +4,14 @@
     <div class="container">
         <h3>Detail Category</h3>
 
-        <table class="table table-striped">
-            <tbody>
+        <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <img src="{{ asset('storage/images/' .$category->images) }}" width="300">
+                </td>
+            </tr>
+
                 <tr>
                     <th width="25">ID</th>
                     <th width="10px">:</th>
