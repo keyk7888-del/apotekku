@@ -8,8 +8,9 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card card-body">
-                <form action="{{ route('obat.store') }}" method="POST" enctype="multipart/form-data"> 
+                <form action="{{ route('obat.update', $obat->id) }}" method="POST" enctype="multipart/form-data"> 
                     @csrf
+                    @method('PUT')
 
                     <div class="form-group mb-3">
                         <label for="nama_obat">Nama Obat</label>

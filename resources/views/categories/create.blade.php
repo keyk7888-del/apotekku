@@ -38,9 +38,15 @@
                             </div>
                             
                             <div class="flex">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                <a href="{{ route('category.index') }}" class="btn btn-secondary">Batal</a>
-                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <span class="ti ti-send me-1"></span>
+                                Simpan
+                            </button>
+
+                            <a href="{{ route('category.index') }}" class="btn btn-secondary">
+                                Batal
+                            </a>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -1,4 +1,4 @@
-@extends('layouts')
+@extends('layouts.app')
 
 @section('title', 'Ubah Profil')
 @section('content')
@@ -9,7 +9,7 @@
                     <h5 class="card-title">Ubah Profil</h5>
                     <p class="card-text">Halaman Untuk Mengubah Profil</p>
 
-                    <form action="{{ route('profil.update') }}" method="POST">
+                    <form action="{{ route('ubah-profil.update') }}" method="POST">
                         @csrf
 
                         <div class="form-group mb-3">
@@ -44,5 +44,4 @@
             </div>
         </div>
     </div>
-@endsection
 @endsection

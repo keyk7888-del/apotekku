@@ -28,6 +28,11 @@
                         </a>
                     </li>
                     <li>
+                        <a class="dropdown-item" href="{{ route('admin.create') }}">
+                            <i class="ti ti-user-plus me-3 ti-md"></i><span class="align-middle">Tambah Admin</span>
+                        </a>
+                    </li>
+                    <li>
                         <div class="d-grid px-2 pt-2 pb-1">
                             <a class="btn btn-sm btn-danger d-flex" onclick="$*('#logout')" href="javascript:void(0);">
                                 <small class="align-middle">Logout</small>

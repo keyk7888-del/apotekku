@@ -35,7 +35,7 @@ class CategoryController extends Controller
         $request->validate([
             'nama' => 'required',
             'deskripsi' => 'required',
-            'images' => 'nullable|images',
+            'images' => 'nullable|image',
         ]);
         $images = $request->file('images');
         $directory = 'images/';
@@ -78,7 +78,7 @@ class CategoryController extends Controller
         $request->validate([
             'nama' => 'required',
             'deskripsi' => 'required',
-            'images' => 'nullable|images',
+            'images' => 'nullable|image',
         ]);
         $images = $request->file('images');
         $directory = 'images/';

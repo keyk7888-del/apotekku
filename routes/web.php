@@ -8,8 +8,12 @@ Route::group([
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::resource('/obat', App\Http\Controllers\ObatController::class);
+
     Route::resource('/category', \App\http\Controllers\CategoryController::class);
+
     Route::resource('/suppliers', \App\http\Controllers\SuppliersController::class);
+
+    Route::resource('/admin', App\Http\Controllers\AdminController::class);
 
     Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
     Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');

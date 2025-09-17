@@ -92,7 +92,7 @@ class ObatController extends Controller
         ]);
 
         $obat = Obat::findOrFail($id);
-
+        $obat->update($request->all());
         $data = $request->only(['nama_obat','category_id','supplier_id','jenis','deskripsi','harga','stok_obat','expired_date','images']);
 
         if ($request->hasFile('images')) {

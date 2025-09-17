@@ -25,17 +25,14 @@
                             <td colspan="5" class="text-center text-muted">Categories is empty</td>
                         </tr>
                     @endif
-                    @foreach ($categories as $item)
+                    @foreach($categories as $index => $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->deskripsi }}</td>
                             <td>
                                 @if($item->images)
-                                    <img src="{{ asset('storage/images/' . $item->images) }}" 
-                                        alt="{{ $item->nama }}" 
-                                        width="70" 
-                                        class="rounded shadow-sm">
+                                    <img src="{{ asset('storage/images/' . $item->images) }}" alt="category" width="70" class="rounded shadow-sm">
                                 @else
                                     <span class="text-muted">No Image</span>
                                 @endif

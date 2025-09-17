@@ -25,12 +25,21 @@
     </div>
 
     <div class="menu-inner-shadow"></div>
-
+    <br>
     <ul class="menu-inner py-1">
         <li class="menu-item">
             <a href="{{ route('home') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 Dashboard
+            </a>
+        </li>
+
+        <br><br>
+
+        <li class="menu-item">
+            <a href="{{ route('admin.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                Admin
             </a>
         </li>
 
@@ -50,7 +59,7 @@
 
         <li class="menu-item">
             <a href="{{ route('suppliers.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon tf-icons ti ti-truck"></i>
                 Suppliers
             </a>
         </li>
