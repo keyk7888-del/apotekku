@@ -19,8 +19,8 @@ class Obat extends Model
         'deskripsi',
         'harga',
         'stok_obat',
-        'expired_date',
-        'images',
+        'kedaluwarsa',
+        'foto',
     ];
 
     public function category()

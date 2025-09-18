@@ -38,7 +38,7 @@
 
         <li class="menu-item">
             <a href="{{ route('admin.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-users"></i>
+                <i class="menu-icon tf-icons ti ti-user"></i>
                 Admin
             </a>
         </li>
@@ -63,6 +63,16 @@
                 Suppliers
             </a>
         </li>
+
+        <br>
+
+        <li class="menu-item">
+            <a href="{{ route('daftarpelanggan.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+               Daftar Pelanggan
+            </a>
+        </li>
+
 
     </ul>
 </aside>

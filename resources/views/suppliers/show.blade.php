@@ -46,9 +46,15 @@
             <td>{{ Carbon\Carbon::parse($suppliers->update_at)->isoFormat('DD/MM/Y HH:mm')}}</td>
         </tr>
     </table>    
-<div class="mt-3">
-    <a href="{{ route('suppliers.index') }}">Kembali</a>
-    Edit Hapus
+    <div class="d-flex gap-2 mt-3">
+        <a href="{{ route('suppliers.index') }}" class="btn btn-secondary">
+            <span class="ti ti-arrow-left me-1"></span>
+            Kembali
+        </a>
+
+        <a href="{{ route('suppliers.edit', $admin->id) }}" class="btn btn-primary">
+            <span class="ti ti-pencil me-1"></span>
+                Edit
+        </a>
     </div>
-</div>
 @endsection

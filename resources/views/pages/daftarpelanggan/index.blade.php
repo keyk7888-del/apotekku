@@ -3,8 +3,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3>Data Obat</h3>
-        <a href="{{ route('obat.create') }}" class="btn btn-primary">Tambah Obat</a>
+        <h3>Daftar Pelanggan</h3>
     </div>
 
     <div class="card shadow">
@@ -13,36 +12,25 @@
                 <thead class="table-dark">
                     <tr>
                         <th>No</th>
-                        <th>Nama Obat</th>
-                        <th>Category</th>
-                        <th>Supplier</th>
-                        <th>Kedaluwarsa</th>
-                        <th>Foto</th>
+                        <th>Nama</th>
+                        <th>Keperluan</th>
+                        <th>Tanggal</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($obat as $index => $item)
+                    @foreach($daftarpelanggan as $index => $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->nama_obat }}</td>
-                            <td>{{ $item->category->nama ?? '-' }}</td>
-                            <td>{{ $item->supplier->nama ?? '-' }}</td>
-                            <td>{{ $item->kedaluwarsa }}</td>
+                            <td>{{ $loop->iteration}}</td>
+                            <td>{{ $item->nama}}</td>
+                            <td>{{ $item->keperluan}}</td>
+                            <td>{{ $item->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
                             <td>
-                                @if($item->foto)
-                                    <img src="{{ asset('storage/images/' . $item->foto) }}" alt="obat" width="70" class="rounded shadow-sm">
-                                @else
-                                    <span class="text-muted">No Image</span>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="{{ route('obat.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
-                                <a href="{{ route('obat.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('obat.destroy', $item->id) }}" method="POST" class="d-inline">
+                                <a href="{{ route('daftarpelanggan.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
+                                <form action="{{ route('daftarpelanggan.destroy', $item->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Yakin hapus data ini?')" class="btn btn-danger btn-sm">Hapus</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                 </form>
                             </td>
                         </tr>

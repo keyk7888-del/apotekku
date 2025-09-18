@@ -48,14 +48,14 @@
                 <td>{{ $obat->stok_obat }}</td>
             </tr>
             <tr>
-                <th width="25%">Expired Date</th>
+                <th width="25%">Kedaluwarsa</th>
                 <th width="10%">:</th>
-                <td>{{ $obat->expired_date }}</td>
+                <td>{{ $obat->kedaluwarsa }}</td>
             </tr>
             <tr>
-                <th width="25%">Images</th>
+                <th width="25%">Foto</th>
                 <th width="10%">:</th>
-                <td>{{ $obat->images}}</td>
+                <td>{{ $obat->foto}}</td>
             </tr>
             <tr>
                 <th width="25%">Dibuat pada</th>
@@ -69,9 +69,16 @@
             </tr>
         </table> 
 
-        <div class="mt-3">
-        <a href="{{ route('obat.index') }}">Kembali</a>
-        Edit Delete
-        </div>
+        <div class="d-flex gap-2 mt-3">
+            <a href="{{ route('obat.index') }}" class="btn btn-secondary">
+                <span class="ti ti-arrow-left me-1"></span>
+                Kembali
+            </a>
+
+            <a href="{{ route('obat.edit', $obat->id) }}" class="btn btn-primary">
+                <span class="ti ti-pencil me-1"></span>
+                Edit
+            </a>
+            </div>
 </div>
 @endsection

@@ -8,51 +8,54 @@
         <tbody>
             <tr>
                 <td colspan="2">
-                    <img src="{{ asset('storage/images/' .$category->images) }}" width="300">
+                    <img src="{{ asset('storage/images/' .$categories->images) }}" width="300">
                 </td>
             </tr>
 
                 <tr>
                     <th width="25">ID</th>
                     <th width="10px">:</th>
-                    <td>{{ $category->id }}</td>
+                    <td>{{ $categories->id }}</td>
                 </tr>
 
                 <tr>
                     <th width="25">NAMA</th>
                     <th width="10px">:</th>
-                    <td>{{ $category->nama }}</td>
+                    <td>{{ $categories->nama }}</td>
                 </tr>
 
                 <tr>
                     <th width="25">Deskripsi</th>
                     <th width="10px">:</th>
-                    <td>{{ $category->deskripsi }}</td>
+                    <td>{{ $categories->deskripsi }}</td>
                 </tr>
 
                 <tr>
                     <th width="25">Images</th>
                     <th width="10px">:</th>
-                    <td>{{ $category->images }}</td>
+                    <td>{{ $categories->images }}</td>
                 </tr>
 
                 <tr>
                     <th width="25">Created At</th>
                     <th width="10px">:</th>
-                    <td>{{ \Carbon\Carbon::parse($category->created_at)->isoformat('DD/MM/Y HH:mm')}}</td>
+                    <td>{{ \Carbon\Carbon::parse($categories->created_at)->isoformat('DD/MM/Y HH:mm')}}</td>
                 </tr>
 
                 <tr>
                     <th width="25">Update At</th>
                     <th width="10px">:</th>
-                    <td>{{ \Carbon\Carbon::parse($category->update_at)->isoformat('DD/MM/Y HH:mm')}}</td>
+                    <td>{{ \Carbon\Carbon::parse($categories->update_at)->isoformat('DD/MM/Y HH:mm')}}</td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="mt-3">
-            <a href="{{ route('category.index') }}" class="btn btn-primary">Back</a>
-            <a href="{{ route('category.edit' , $category->id) }}" class="btn btn-secondary">Edit</a>
-        </div>
+        <div class="d-flex gap-2 mt-3">
+            <a href="{{ route('category.index') }}" class="btn btn-secondary">
+                <span class="ti ti-arrow-left me-1"></span>
+                Kembali
+            </a>
+
+            </div>
     </div>
 @endsection

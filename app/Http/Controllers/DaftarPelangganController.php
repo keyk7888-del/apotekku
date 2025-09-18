@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 
-class PelangganController extends Controller
+class DaftarPelangganController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $pelanggan = Pelanggan::orderBy('nama','ASC')->get();
-        return view('pages.pelanggan.index', compact('pelanggan'));
+         $daftarpelanggan = Pelanggan::orderBy('nama', 'asc')->get(); 
+        return view('pages.daftarpelanggan.index', compact('daftarpelanggan'));
     }
 
     /**
@@ -28,14 +28,7 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'no_telp' => 'required',
-            'email' => 'required|email',
-            'keperluan' => 'required',
-        ]);
-        Pelanggan::create($request->all());
-        return redirect()->route('pelanggan.index')->with(' success', 'Data Berhasil disimpan');
+        //
     }
 
     /**
@@ -43,7 +36,8 @@ class PelangganController extends Controller
      */
     public function show(string $id)
     {
-        //
+         $daftarpelanggan = Pelanggan::findOrFail($id);
+        return view('pages.daftarpelanggan.show', compact('daftarpelanggan'));
     }
 
     /**
@@ -67,6 +61,7 @@ class PelangganController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Pelanggan::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Daftar Pelanggan berhasil dihapus!');
     }
 }

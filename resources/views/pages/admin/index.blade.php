@@ -60,11 +60,11 @@
     <script type="text/javascript">
         function actionDelete(url) {
             Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
+                title: "Apakah Anda Yakin?",
+                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonText: "Yes, delete it!",
+                confirmButtonText: "Ya saya yakin, Hapus!",
                 cancelButtonText: "Cancel"
             }).then((result) => {
                 if (result.isConfirmed) {

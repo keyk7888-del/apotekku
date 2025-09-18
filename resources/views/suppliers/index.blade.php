@@ -48,4 +48,53 @@
         </div>
     </div>
 </div>
+<form id="form-delete" action="" method="POST" class="d-none">
+        @csrf
+        @method('DELETE')
+    </form>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+    <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+
+    <script type="text/javascript">
+        function actionDelete(url) {
+            Swal.fire({
+                title: "Apakah Anda Yakin?",
+                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya saya yakin, Hapus!",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#form-delete').attr('action', url);
+                    $('#form-delete').submit();
+                }
+            });
+        }
+
+        $(function() {
+            $('.dataTable').DataTable();
+        });
+    </script>
+
+    @if(Session::has('success'))
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: '{{ Session::get('success') }}',
+            showConfirmButton: false,
+            timer: 1000
+        });
+    </script>
+    @endif
+@endpush

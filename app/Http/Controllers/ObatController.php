@@ -35,11 +35,11 @@ class ObatController extends Controller
             'deskripsi' => 'required',
             'harga' => 'required',
             'stok_obat' => 'required',
-            'expired_date' => 'required',
-            'images' => 'nullable|image',
+            'kedaluwarsa' => 'required',
+            'foto' => 'nullable|image',
         ]);
 
-        $images = $request->file('images');
+        $images = $request->file('foto');
         $directory = 'images/';
         $filename = Str::random(10) . '.' . $images->getClientOriginalExtension();
         Storage::putFileAs($directory, $images, $filename);
@@ -52,8 +52,8 @@ class ObatController extends Controller
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
             'stok_obat' => $request->stok_obat,
-            'expired_date' => $request->expired_date,
-            'images' => $filename,   
+            'kedaluwarsa' => $request->kedaluwarsa,
+            'foto' => $filename,   
         ]);
 
         return redirect()->route('obat.index')->with('success', 'Obat berhasil ditambahkan!');
@@ -87,20 +87,20 @@ class ObatController extends Controller
             'deskripsi' => 'required',
             'harga' => 'required',
             'stok_obat' => 'required',
-            'expired_date' => 'required',
-            'images' => 'nullable|image',
+            'kedaluwarsa' => 'required',
+            'foto' => 'nullable|image',
         ]);
 
         $obat = Obat::findOrFail($id);
         $obat->update($request->all());
-        $data = $request->only(['nama_obat','category_id','supplier_id','jenis','deskripsi','harga','stok_obat','expired_date','images']);
+        $data = $request->only(['nama_obat','category_id','supplier_id','jenis','deskripsi','harga','stok_obat','kedaluwarsa','foto']);
 
-        if ($request->hasFile('images')) {
-            $images = $request->file('images');
+        if ($request->hasFile('foto')) {
+            $images = $request->file('foto');
             $directory = 'images/';
             $filename = Str::random(10) . '.' . $images->getClientOriginalExtension();
             Storage::putFileAs($directory, $images, $filename);
-            $data['images'] = $filename;
+            $data['foto'] = $filename;
         }
 
         $obat->update($data);

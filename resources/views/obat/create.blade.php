@@ -86,31 +86,31 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="expired_date">Expired Date</label>
-                        <input type="date" name="expired_date" id="expired_date" class="form-control"/>
-                        @error('expired_date')
+                        <label for="kedaluwarsa">Kedaluwarsa</label>
+                        <input type="date" name="kedaluwarsa" id="kedaluwarsa" class="form-control"/>
+                        @error('kedaluwarsa')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="images">Images</label>
-                        <input type="file" name="images" id="images" class="form-control"/>
-                        @error('images')
+                        <label for="foto">Foto</label>
+                        <input type="file" name="foto" id="foto" class="form-control"/>
+                        @error('foto')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="flex">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="ti ti-send me-1"></span>
-                                Simpan
-                            </button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="ti ti-send me-1"></span>
+                            Simpan
+                        </button>
 
-                            <a href="{{ route('obat.index') }}" class="btn btn-secondary">
-                                Batal
-                            </a>
-                        </div>
+                        <a href="{{ route('obat.index') }}" class="btn btn-secondary">
+                            Batal
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>
