@@ -14,7 +14,7 @@ class ObatController extends Controller
     public function index()
     {
         //$obat = Obat::with('category')->orderBy('created_at', 'desc')->get();
-        $obat = Obat::with(['category','supplier'])->orderBy('created_at', 'desc')->get();
+        $obat = Obat::with(['category','supplier'])->orderBy('created_at', 'ASC')->get();
         return view('obat.index', compact('obat'));
     }
 
@@ -61,8 +61,9 @@ class ObatController extends Controller
 
     public function show(string $id)
     {
-        $obat = Obat::findOrFail($id);
+        $obat = Obat::with(['category', 'supplier'])->findOrFail($id);
         return view('obat.show', compact('obat'));
+
     }
 
     public function edit(string $id)

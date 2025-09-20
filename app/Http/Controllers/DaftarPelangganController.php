@@ -11,7 +11,7 @@ class DaftarPelangganController extends Controller
      */
     public function index()
     {
-         $daftarpelanggan = Pelanggan::orderBy('nama', 'asc')->get(); 
+         $daftarpelanggan = Pelanggan::orderBy('nama', 'ASC')->get(); 
         return view('pages.daftarpelanggan.index', compact('daftarpelanggan'));
     }
 

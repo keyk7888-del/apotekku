@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\Transaksi;
 use App\Models\Obat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,7 +26,7 @@ class Obat extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
     
     public function supplier()

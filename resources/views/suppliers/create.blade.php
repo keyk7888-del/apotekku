@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h3>Tambah Suppliers</h3>
+        <h3>Tambah Supplier</h3>
         <a href="{{ Route('suppliers.index') }}">Kembali</a>
 
             <div class="row">

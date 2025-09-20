@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('nama', 'asc')->get(); 
+        $categories = Category::orderBy('nama', 'ASC')->get(); 
         return view('categories.index', compact('categories'));
 
     }
@@ -35,9 +37,9 @@ class CategoryController extends Controller
         $request->validate([
             'nama' => 'required',
             'deskripsi' => 'required',
-            'images' => 'nullable|image',
+            'foto' => 'nullable|image',
         ]);
-        $images = $request->file('images');
+        $images = $request->file('foto');
         $directory = 'images/';
         $filename = Str::random(10) . '.' . $images->getClientOriginalExtension();
         Storage::putFileAs($directory, $images, $filename);
@@ -45,11 +47,11 @@ class CategoryController extends Controller
         Category::create([
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
-            'images' => $filename,   
+            'foto' => $filename,   
         ]);
 
         //Category::create($request->all());
-        return redirect()->route('categories.index')->with('success', 'category berhasil ditambahkan!');
+        return redirect()->route('category.index')->with('success', 'category berhasil ditambahkan!');
 
     }
 
@@ -78,19 +80,22 @@ class CategoryController extends Controller
         $request->validate([
             'nama' => 'required',
             'deskripsi' => 'required',
-            'images' => 'nullable|image',
+            'foto' => 'nullable|image',
         ]);
-        $images = $request->file('images');
-        $directory = 'images/';
-        $filename = Str::random(10) . '.' . $images->getClientOriginalExtension();
-        Storage::putFileAs($directory, $images, $filename);
+        if ($request->hasFile('foto')) {
+            $images = $request->file('foto');
+            $directory = 'images/';
+            $filename = Str::random(10) . '.' . $images->getClientOriginalExtension();
+            Storage::putFileAs($directory, $images, $filename);
+            $data['foto'] = $filename;
+        }
 
         Category::create([
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
-            'images' => $filename,   
+            'foto' => $filename,   
         ]);
-        return redirect()->route('categories.index')->with('success', 'categories berhasil diupdate!');
+        return redirect()->route('category.index')->with('success', 'categories berhasil diupdate!');
     }
 
     /**
@@ -98,6 +103,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $categories = Category::find($id)->delete();
+        return redirect()->back();
     }
 }

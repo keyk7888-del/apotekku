@@ -29,10 +29,10 @@
                             </div>
                             
                             <div class="form-group mb-3">
-                            <label for="images" class="form-label">Images</label>
-                            <input type="file" name="images" id="images" class="form-control"/>
+                            <label for="foto" class="form-label">Foto</label>
+                            <input type="file" name="foto" id="foto" class="form-control"/>
 
-                            @error('images')
+                            @error('foto')
                                 <span class="text-danger">{{$message}}</span>
                             @enderror
                             </div>

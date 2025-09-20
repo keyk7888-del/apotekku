@@ -14,16 +14,16 @@
 
                     <div class="form-group mb-3">
                         <label for="nama_obat">Nama Obat</label>
-                        <input type="text" name="nama_obat" id="nama_obat" class="form-control"/>
+                        <input type="text" class="form-control @error('nama_obat') is-invalid @enderror" id="nama_obat" name="nama_obat" value="{{ old('nama_obat') ?? $obat->nama_obat }}" />
                         @error('nama_obat')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="category_id" class="form-label">Category</label>
+                        <label for="category_id" class="form-label">Pilih kategori</label>
                         <select name="category_id" id="category_id" class="form-select">
-                            <option value="">Choose Category</option>
+                            <option value="">Pilih Kategori</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->nama }}</option>
                             @endforeach
@@ -36,7 +36,7 @@
                     <div class="form-group mb-3">
                         <label for="supplier_id" class="form-label">Supplier</label>
                         <select name="supplier_id" id="supplier_id" class="form-select">
-                            <option value="">Choose Supplier</option>
+                            <option value="">Pilih Supplier</option>
                             @foreach ($suppliers as $supplier)
                                 <option value="{{ $supplier->id }}">{{ $supplier->nama }}</option>
                             @endforeach
@@ -63,7 +63,7 @@
 
                     <div class="form-group mb-3">
                         <label for="deskripsi">Deskripsi</label>
-                        <input type="text" name="deskripsi" id="deskripsi" class="form-control"/>
+                        <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" value="{{ old('deskripsi') ?? $obat->deskripsi }}" />
                         @error('deskripsi')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -71,7 +71,7 @@
 
                     <div class="form-group mb-3">
                         <label for="harga">Harga</label>
-                        <input type="number" name="harga" id="harga" class="form-control"/>
+                        <input type="number" class="form-control @error('harga') is-invalid @enderror" id="harga" name="harga" value="{{ old('harga') ?? $obat->harga }}" />
                         @error('harga')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -79,7 +79,7 @@
 
                     <div class="form-group mb-3">
                         <label for="stok_obat">Stok Obat</label>
-                        <input type="number" name="stok_obat" id="stok_obat" class="form-control"/>
+                        <input type="number" class="form-control @error('stok_obat') is-invalid @enderror" id="stok_obat" name="stok_obat" value="{{ old('stok_obat') ?? $obat->stok_obat }}" />
                         @error('stok_obat')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -87,7 +87,7 @@
 
                     <div class="form-group mb-3">
                         <label for="kedaluwarsa">Kedaluwarsa</label>
-                        <input type="date" name="kedaluwarsa" id="kedaluwarsa" class="form-control"/>
+                        <input type="date" class="form-control @error('kedaluwarsa') is-invalid @enderror" id="kedaluwarsa" name="kedaluwarsa" value="{{ old('kedaluwarsa') ?? $obat->kedaluwarsa }}" />
                         @error('kedaluwarsa')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -95,7 +95,7 @@
 
                     <div class="form-group mb-3">
                         <label for="foto">Foto</label>
-                        <input type="file" name="foto" id="foto" class="form-control"/>
+                        <input type="file" class="form-control @error('foto') is-invalid @enderror" id="foto" name="foto" value="{{ old('foto') ?? $obat->foto }}" />
                         @error('foto')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror

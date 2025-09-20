@@ -20,9 +20,9 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="category_id" class="form-label">Category</label>
+                        <label for="category_id" class="form-label">Kategori</label>
                         <select name="category_id" id="category_id" class="form-select">
-                            <option value="">Choose Category</option>
+                            <option value="">Pilih Kategori</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->nama }}</option>
                             @endforeach
@@ -35,7 +35,7 @@
                     <div class="form-group mb-3">
                         <label for="supplier_id" class="form-label">Supplier</label>
                         <select name="supplier_id" id="supplier_id" class="form-select">
-                            <option value="">Choose Supplier</option>
+                            <option value="">Pilih Supplier</option>
                             @foreach ($suppliers as $supplier)
                                 <option value="{{ $supplier->id }}">{{ $supplier->nama }}</option>
                             @endforeach

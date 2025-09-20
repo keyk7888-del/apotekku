@@ -13,7 +13,7 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-        $suppliers = Supplier::all(); 
+        $suppliers = Supplier::orderBy('nama', 'ASC')->get(); 
         return view('suppliers.index', compact('suppliers'));
     }
 
@@ -57,8 +57,8 @@ class SuppliersController extends Controller
      */
     public function show(string $id)
     {
-        $supplier = Supplier::find($id);
-        return view('suppliers.show', compact('supplier'));
+        $suppliers = Supplier::find($id);
+        return view('suppliers.show', compact('suppliers'));
     }
 
     /**
@@ -66,8 +66,8 @@ class SuppliersController extends Controller
      */
     public function edit(string $id)
     {
-        $suppliers = Supplier::find($id);
-        return view('suppliers.edit', compact('supplier'));
+        $suppliers = Supplier::findOrFail($id);
+        return view('suppliers.edit', compact('suppliers'));
     }
 
     /**
@@ -85,7 +85,7 @@ class SuppliersController extends Controller
         ]);
 
         $suppliers = Supplier::find($id);
-        $supplier->update($request->only(['nama', 'alamat', 'no_telp', 'email', 'kontak_person', 'keterangan']));
+        $suppliers->update($request->only(['nama', 'alamat', 'no_telp', 'email', 'kontak_person', 'keterangan']));
         return redirect()->route('suppliers.index');
     }
 

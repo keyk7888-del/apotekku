@@ -6,9 +6,9 @@
 
     <table class="table table-bordered table-striped">
         <tbody>
-            <tr>
+             <tr>
                 <td colspan="2">
-                    <img src="{{ asset('storage/images/' .$obat->images) }}" width="300">
+                    <img src="{{ asset('storage/images/' . $obat->foto) }}" width="300">
                 </td>
             </tr>
        
@@ -18,14 +18,14 @@
                 <td>{{ $obat->nama_obat }}</td>
             </tr>
              <tr>
-                <th width="25%">Category_id</th>
+                <th width="25%">Kategori</th>
                 <th width="10%">:</th>
-                <td>{{ $obat->category_id }}</td>
+                <td>{{ $obat->category->nama}}</td>
             </tr>
              <tr>
-                <th width="25%">Supplier_id</th>
+                <th width="25%">Supplier</th>
                 <th width="10%">:</th>
-                <td>{{ $obat->supplier_id }}</td>
+                <td>{{ $obat->supplier->nama}}</td>
             </tr>
              <tr>
                 <th width="25%">Jenis</th>

@@ -13,7 +13,7 @@ class Category extends Model
     protected $fillable = [
         'nama',
         'deskripsi',
-        'images',
+        'foto',
     ];
 
     public function obat()

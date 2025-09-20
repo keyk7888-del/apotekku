@@ -14,7 +14,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Obat</th>
-                        <th>Category</th>
+                        <th>Kategori</th>
                         <th>Supplier</th>
                         <th>Kedaluwarsa</th>
                         <th>Foto</th>
@@ -22,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($obat as $index => $item)
+                    @foreach($obat as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->nama_obat }}</td>
@@ -33,17 +33,15 @@
                                 @if($item->foto)
                                     <img src="{{ asset('storage/images/' . $item->foto) }}" alt="obat" width="70" class="rounded shadow-sm">
                                 @else
-                                    <span class="text-muted">No Image</span>
+                                    <span class="text-muted">Tidak Ada Foto</span>
                                 @endif
                             </td>
                             <td>
                                 <a href="{{ route('obat.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
                                 <a href="{{ route('obat.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('obat.destroy', $item->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Yakin hapus data ini?')" class="btn btn-danger btn-sm">Hapus</button>
-                                </form>
+                                <a href="javascript:;" class="btn btn-sm btn-danger" onclick="actionDelete('{{ route('obat.destroy', $item->id) }}')">
+                                    <span class="ti ti-trash"></span>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -60,35 +58,33 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}">
 @endpush
 
 @push('scripts')
     <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-    <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-
+     <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
     <script type="text/javascript">
-        function actionDelete(url) {
+        $(function(){
+            $('.dataTable').DataTable();
+        });
+
+        function actionDelete(url){
             Swal.fire({
-                title: "Apakah Anda Yakin?",
-                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                title: "Apakah Kamu Yakin?",
+                text: "Kamu Tidak Dapat Mengembalikan Data Yang Telah Dihapus",
                 icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Ya saya yakin, Hapus!",
-                cancelButtonText: "Cancel"
-            }).then((result) => {
+                showCancelButton: true, 
+                confirmButtonText: "Ya Saya Yakin, Hapus!",
+            }).then((result)=>{
                 if (result.isConfirmed) {
                     $('#form-delete').attr('action', url);
                     $('#form-delete').submit();
                 }
             });
         }
-
-        $(function() {
-            $('.dataTable').DataTable();
-        });
     </script>
 
     @if(Session::has('success'))

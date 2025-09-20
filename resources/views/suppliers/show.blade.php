@@ -2,7 +2,7 @@
 
 @section('content')
 <div class='container'>
-    <h3>Detail Suppliers</h3>
+    <h3>Detail Supplier</h3>
 
     <table class="table table-bordered table-striped">
         <tr>
@@ -52,7 +52,7 @@
             Kembali
         </a>
 
-        <a href="{{ route('suppliers.edit', $admin->id) }}" class="btn btn-primary">
+        <a href="{{ route('suppliers.edit', $suppliers->id) }}" class="btn btn-primary">
             <span class="ti ti-pencil me-1"></span>
                 Edit
         </a>

@@ -27,11 +27,9 @@
                             <td>
                                 <a href="{{ route('admin.show', $admin->id) }}" class="btn btn-info btn-sm">Detail</a>
                                 <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Yakin hapus data ini?')" class="btn btn-danger btn-sm">Hapus</button>
-                                </form>
+                                <a href="javascript:;" class="btn btn-sm btn-danger" onclick="actionDelete('{{ route('admin.destroy', $admin->id) }}')">
+                                    <span class="ti ti-trash"></span>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -48,35 +46,33 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}">
 @endpush
 
 @push('scripts')
     <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-    <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-
+     <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
     <script type="text/javascript">
-        function actionDelete(url) {
+        $(function(){
+            $('.dataTable').DataTable();
+        });
+
+        function actionDelete(url){
             Swal.fire({
-                title: "Apakah Anda Yakin?",
-                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                title: "Apakah Kamu Yakin?",
+                text: "Kamu Tidak Dapat Mengembalikan Data Yang Telah Dihapus",
                 icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Ya saya yakin, Hapus!",
-                cancelButtonText: "Cancel"
-            }).then((result) => {
+                showCancelButton: true, 
+                confirmButtonText: "Ya Saya Yakin, Hapus!",
+            }).then((result)=>{
                 if (result.isConfirmed) {
                     $('#form-delete').attr('action', url);
                     $('#form-delete').submit();
                 }
             });
         }
-
-        $(function() {
-            $('.dataTable').DataTable();
-        });
     </script>
 
     @if(Session::has('success'))

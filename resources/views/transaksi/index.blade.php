@@ -3,7 +3,8 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3>Daftar Pelanggan</h3>
+        <h3>Data Transaksi</h3>
+        <a href="{{ route('transaksi.create') }}" class="btn btn-primary">Tambah Transaksi</a>
     </div>
 
     <div class="card shadow">
@@ -12,22 +13,26 @@
                 <thead class="table-dark">
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Keperluan</th>
-                        <th>Tanggal</th>
+                        <th>Pelanggan Id</th>
+                        <th>Nomor Transaksi</th>
+                        <th>Tanggal Transaksi</th>
+                        <th>Obat</th>
+                        <th>Metode Pembayaran</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($daftarpelanggan as $index => $item)
+                    @foreach($transaksi as $item)
                         <tr>
-                            <td>{{ $loop->iteration}}</td>
-                            <td>{{ $item->nama}}</td>
-                            <td>{{ $item->keperluan}}</td>
-                            <td>{{ $item->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->daftarpelanggan->nama ?? '-' }}</td>
+                            <td>{{ $item->nomor_transaksi}}</td>
+                            <td>{{ $item->tanggal_transaksi}}</td>
+                            <td>{{ $item->obat->nama_obat ?? '-' }}</td>
+                            <td>{{ $item->metode_pembayaran }}</td>
                             <td>
-                                <a href="{{ route('daftarpelanggan.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
-                                <a href="javascript:;" class="btn btn-sm btn-danger" onclick="actionDelete('{{ route('daftarpelanggan.destroy', $item->id) }}')">
+                                <a href="{{ route('transaksi.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
+                                <a href="javascript:;" class="btn btn-sm btn-danger" onclick="actionDelete('{{ route('transaksi.destroy', $item->id) }}')">
                                     <span class="ti ti-trash"></span>
                                 </a>
                             </td>
