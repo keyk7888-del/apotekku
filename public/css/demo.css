@@ -127,3 +127,33 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+
+/* Background halaman utama */
+body {
+  background-color: #b5d1d6; /*  */
+}
+
+/* Sidebar */
+.layout-menu {
+  background-color: #dce9ee !important; /*  */
+  color: #ffffff;
+}
+
+/* Navbar */
+.layout-navbar {
+  background-color: #dce9ee !important; /*  */
+  color: #ffffff !important;
+}
+
+/* Card */
+.card {
+  background-color: #fafeff !important; /*  */
+}
+
+/* Header tabel */
+.table thead th {
+  background-color: #899aac;
+  color: #fff;
+}
+

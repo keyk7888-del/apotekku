@@ -8,7 +8,8 @@
 
     <div class="card shadow">
         <div class="card-body">
-            <table class="table table-bordered table-striped table-hover text-center align-middle">
+            <table class="table table-bordered table-striped table-hover text-center align-middle" id="pelangganTable">
+                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari Pelanggan"><br>
                 <thead class="table-dark">
                     <tr>
                         <th>No</th>
@@ -73,6 +74,17 @@
                 }
             });
         }
+
+        // 🔍 Script Search Pelanggan
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+            let value = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#pelangganTable tbody tr");
+            
+            rows.forEach(function(row) {
+                let text = row.textContent.toLowerCase();
+                row.style.display = text.includes(value) ? "" : "none";
+            });
+        });
     </script>
 
     @if(Session::has('success'))

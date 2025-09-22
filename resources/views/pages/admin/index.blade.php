@@ -9,7 +9,8 @@
 
     <div class="card shadow">
         <div class="card-body">
-            <table class="table table-bordered table-striped table-hover text-center align-middle">
+            <table class="table table-bordered table-striped table-hover text-center align-middle" id="adminTable">
+                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari Admin"><br>
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">No</th>
@@ -73,6 +74,17 @@
                 }
             });
         }
+
+        // 🔍 Script Search Admin
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+            let value = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#adminTable tbody tr");
+            
+            rows.forEach(function(row) {
+                let text = row.textContent.toLowerCase();
+                row.style.display = text.includes(value) ? "" : "none";
+            });
+        });
     </script>
 
     @if(Session::has('success'))

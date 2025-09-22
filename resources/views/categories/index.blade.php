@@ -4,12 +4,14 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Kategori</h3>
+        
         <a href="{{ route('category.create') }}" class="btn btn-primary">Tambah Kategori</a>
     </div>
 
     <div class="card shadow-sm">
         <div class="card-body">
-            <table class="table table-striped table-bordered">
+            <table class="table table-bordered table-striped table-hover text-center align-middle" id="kategoriTable">
+                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari Kategori"><br>
                 <thead class="table-dark">
                     <tr>
                         <th>No</th>
@@ -86,6 +88,17 @@
                 }
             });
         }
+
+        // 🔍 Script Search Admin
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+            let value = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#kategoriTable tbody tr");
+            
+            rows.forEach(function(row) {
+                let text = row.textContent.toLowerCase();
+                row.style.display = text.includes(value) ? "" : "none";
+            });
+        });
     </script>
 
     @if(Session::has('success'))

@@ -3,13 +3,14 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3>Data Obat</h3>
+        <h3>Data Obat</h3> 
         <a href="{{ route('obat.create') }}" class="btn btn-primary">Tambah Obat</a>
     </div>
 
     <div class="card shadow">
         <div class="card-body">
-            <table class="table table-bordered table-striped table-hover text-center align-middle">
+            <table class="table table-bordered table-striped table-hover text-center align-middle" id="obatTable">
+                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari Obat"><br>
                 <thead class="table-dark">
                     <tr>
                         <th>No</th>
@@ -85,6 +86,17 @@
                 }
             });
         }
+
+        // 🔍 Script Search Admin
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+            let value = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#obatTable tbody tr");
+            
+            rows.forEach(function(row) {
+                let text = row.textContent.toLowerCase();
+                row.style.display = text.includes(value) ? "" : "none";
+            });
+        });
     </script>
 
     @if(Session::has('success'))
