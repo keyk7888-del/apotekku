@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('obat', function (Blueprint $table) {
             $table->id();
-             $table->string('nama_obat', 225); // Nama Produk (Obat)
+            $table->string('nama_obat', 225); // Nama Produk (Obat)
             $table->unsignedBigInteger('category_id')->nullable(); // Kategori Obat
             $table->unsignedBiginteger('supplier_id')->nullable(); //Suppliers(pemasok) Obat
             $table->string('jenis'); // Jenis Obat (Tablet,Kapsul, dll)

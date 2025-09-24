@@ -35,7 +35,7 @@ class PelangganController extends Controller
             'keperluan' => 'required',
         ]);
         Pelanggan::create($request->all());
-        return redirect()->route('pelanggan.index')->with(' success', 'Data Berhasil disimpan');
+        return redirect()->route('pelanggan.index')->with(' success', 'Data Pelanggan Berhasil Ditambahkan');
     }
 
     /**

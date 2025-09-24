@@ -48,7 +48,7 @@
                 <td>{{ Carbon\Carbon::parse($transaksi->created_at)->isoFormat('DD/MM/Y HH:mm')}}</td>
             </tr>
             <tr>
-                <th width="25%">Diperbarui</th>
+                <th width="25%">Diperbarui Pada</th>
                 <th width="10%">:</th>
                 <td>{{ Carbon\Carbon::parse($transaksi->update_at)->isoFormat('DD/MM/Y HH:mm')}}</td>
             </tr>

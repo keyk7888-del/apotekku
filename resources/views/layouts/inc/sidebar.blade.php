@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="{{ route('home') }}" class="app-brand-link">
+        <a href="{{ route('dashboard') }}" class="app-brand-link">
             <span class="app-brand-logo demo">
                 <img src="{{ asset("images/logo.apotek.png") }}" width="40" height="40">
             </span>
@@ -18,7 +18,7 @@
     <br>
     <ul class="menu-inner py-1">
         <li class="menu-item">
-            <a href="{{ route('home') }}" class="menu-link">
+            <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 Dashboard
             </a>

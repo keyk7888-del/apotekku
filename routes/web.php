@@ -10,6 +10,10 @@ Route::get('/', [App\Http\Controllers\PelangganController::class, 'index'])->nam
 Route::post('/', [App\Http\Controllers\PelangganController::class, 'store'])->name('pelanggan.store');
 
 
+Route::get('/obatshop', [App\Http\Controllers\ObatShopController::class, 'index'])->name('obatshop');
+
+
+
 Auth::routes([
     'register' => false,
     'reset' => false,
@@ -20,7 +24,7 @@ Auth::routes([
 Route::group([
     'middleware' => ['auth']
 ], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/daftarpelanggan', App\Http\Controllers\DaftarPelangganController::class)->only('index','show','destroy');
 
     Route::resource('/obat', App\Http\Controllers\ObatController::class);

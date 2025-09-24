@@ -22,7 +22,7 @@
 
                     <div class="form-group mb-3">
                         <label for="category_id" class="form-label">Pilih kategori</label>
-                        <select name="category_id" id="category_id" class="form-select">
+                        <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror" value="{{ old('category_id') ?? $obat->category_id }}" >
                             <option value="">Pilih Kategori</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->nama }}</option>
@@ -35,7 +35,7 @@
 
                     <div class="form-group mb-3">
                         <label for="supplier_id" class="form-label">Supplier</label>
-                        <select name="supplier_id" id="supplier_id" class="form-select">
+                        <select name="supplier_id" id="supplier_id" class="form-select @error('supplier_id') is-invalid @enderror" value="{{ old('supplier_id') ?? $obat->supplier_id }}">
                             <option value="">Pilih Supplier</option>
                             @foreach ($suppliers as $supplier)
                                 <option value="{{ $supplier->id }}">{{ $supplier->nama }}</option>
@@ -48,7 +48,7 @@
 
                     <div class="mb-3">
                         <label for="jenis" class="form-label">Jenis</label>
-                        <select name="jenis" id="jenis" class="form-control" required>
+                        <select name="jenis" id="jenis" class="form-control @error('jenis') is-invalid @enderror" value="{{ old('jenis') ?? $obat->jenis }}" required>
                             <option value="">Pilih Jenis Obat</option>
                             <option value="Tablet">Tablet</option>
                             <option value="Kapsul">Kapsul</option>

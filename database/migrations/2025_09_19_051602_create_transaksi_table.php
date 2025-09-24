@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('obat_id')->nullable();
             $table->double('harga', 16, 2)->default(0);
             $table->integer('jumlah_obat');
-            $table->double('subtotal', 16, 2)->default(0);;
+            $table->double('subtotal', 16, 2)->default(0);
             $table->enum('metode_pembayaran', ['Cash', 'Transfer']);
             $table->timestamps();
         });
