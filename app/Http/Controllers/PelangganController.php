@@ -35,7 +35,7 @@ class PelangganController extends Controller
             'keperluan' => 'required',
         ]);
         Pelanggan::create($request->all());
-        return redirect()->route('pelanggan.index')->with(' success', 'Data Pelanggan Berhasil Ditambahkan');
+        return redirect()->route('obatshop.index')->with(' success', 'Data Pelanggan Berhasil Ditambahkan');
     }
 
     /**

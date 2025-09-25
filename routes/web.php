@@ -1,17 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\ObatShopController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/', [App\Http\Controllers\PelangganController::class, 'index'])->name('pelanggan.index');
 Route::post('/', [App\Http\Controllers\PelangganController::class, 'store'])->name('pelanggan.store');
 
+Route::get('/obatshop', [App\Http\Controllers\Frontend\ObatShopController::class, 'index'])->name('obatshop.index');
+Route::get('/obatshop/{id}', [App\Http\Controllers\Frontend\ObatShopController::class, 'show'])->name('obatshop.show');
 
-Route::get('/obatshop', [App\Http\Controllers\ObatShopController::class, 'index'])->name('obatshop');
-
+Route::get('/keranjang', [App\Http\Controllers\Frontend\KeranjangController::class, 'index'])->name('keranjang.index');
+Route::post('/keranjang/tambah/{id}', [App\Http\Controllers\Frontend\KeranjangController::class, 'tambah'])->name('keranjang.tambah');
 
 
 Auth::routes([
@@ -48,3 +48,4 @@ Auth::routes([
     'verify' => false,
     'confirm' => false,
 ]);
+

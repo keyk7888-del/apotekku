@@ -9,7 +9,7 @@ class ObatShop extends Model
     use HasFactory;
 
     // pakai tabel 'obats' meskipun nama model 'ObatShop'
-
+    protected $table = 'obatshop';  
     // field yang boleh diisi
     protected $fillable = [
         'nama',

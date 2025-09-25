@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ObatController extends Controller
 {
+   
     public function index()
     {
         //$obat = Obat::with('category')->orderBy('created_at', 'desc')->get();
