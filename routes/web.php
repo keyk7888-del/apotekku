@@ -12,6 +12,7 @@ Route::get('/obatshop/{id}', [App\Http\Controllers\Frontend\ObatShopController::
 
 Route::get('/keranjang', [App\Http\Controllers\Frontend\KeranjangController::class, 'index'])->name('keranjang.index');
 Route::post('/keranjang/tambah/{id}', [App\Http\Controllers\Frontend\KeranjangController::class, 'tambah'])->name('keranjang.tambah');
+Route::delete('/keranjang/hapus/{id}', [App\Http\Controllers\Frontend\KeranjangController::class, 'hapus'])->name('keranjang.hapus');
 
 
 Auth::routes([
@@ -29,9 +30,9 @@ Route::group([
 
     Route::resource('/obat', App\Http\Controllers\ObatController::class);
 
-    Route::resource('/category', \App\http\Controllers\CategoryController::class);
+    Route::resource('/category', \App\Http\Controllers\CategoryController::class);
 
-    Route::resource('/suppliers', \App\http\Controllers\SuppliersController::class);
+    Route::resource('/suppliers', \App\Http\Controllers\SuppliersController::class);
 
     Route::resource('/admin', App\Http\Controllers\AdminController::class);
 

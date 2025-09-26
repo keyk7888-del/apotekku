@@ -23,11 +23,11 @@
                     <label class="me-2">Jumlah:</label>
                     <input type="number" name="quantity" value="1" min="1" class="form-control w-25">
                 </div>
-                <button type="submit" class="btn btn-dark px-4">Tambah ke Keranjang</button>
+                <button type="submit" class="btn btn-dark px-4"> + Tambah ke Keranjang</button>
             </form>
 
             <div class="mt-4">
-                <p><strong>Kategori:</strong> {{ $obat->category->nama ?? 'Tidak ada kategori' }}</p>
+                <p><strong>Kategori:</strong> {{ $obat->category->nama ?? 'Tidak ada kategori' }}</p><br>
             </div>
         </div>
     </div>

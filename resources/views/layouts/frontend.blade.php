@@ -24,7 +24,8 @@
       <div class="collapse navbar-collapse show" id="navbarNav">
         <ul class="navbar-nav d-flex flex-row fs-4 fw-semibold">
       <li class="nav-item me-4"><a class="nav-link" href="{{ url('/obatshop') }}">Obat Shop</a></li>
-      <li class="nav-item me-4"><a class="nav-link" href="{{ url('/keranjang') }}">Keranjang Obat</a></li>
+      <li class="nav-item">
+    <a class="nav-link" href="{{ route('keranjang.index') }}">Keranjang Obat</a></li>
       <li class="nav-item"><a class="nav-link" href="{{ url('/pesanan') }}">Pesananku</a></li>
     </ul>
       </div>

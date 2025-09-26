@@ -1,5 +1,4 @@
 @extends('layouts.frontend')
-
 @section('content')
 <div class="container" style="background-color: #bfd4d4; padding:20px;">
     <h2 class="mb-4">Daftar Obat</h2>
@@ -49,21 +48,32 @@
                     <!-- Nama obat juga link -->
                     <h6 class="mt-2">
                         <a href="{{ route('obatshop.show', $obat->id) }}" 
-                           class="text-dark text-decoration-none">
+                        class="text-dark text-decoration-none">
                             {{ $obat->nama_obat }}
                         </a>
                     </h6>
+
                     <p class="text-danger mb-1">
                         Rp {{ number_format($obat->harga, 0, ',', '.') }}
                     </p>
-                    <small class="text-muted">
+
+                    <small class="text-muted d-block mb-2">
                         {{ Str::limit($obat->deskripsi, 40) }}
                     </small>
-                    <br>
-                    <span class="badge bg-info text-dark mt-2">
+
+                    <span class="badge bg-info text-dark mb-3">
                         {{ $obat->category->nama ?? 'Tidak ada kategori' }}
                     </span>
+
+                    <!-- 🔹 Tombol Tambah ke Keranjang -->
+                    <form action="{{ route('keranjang.tambah', $obat->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-primary w-100">
+                            + Tambah ke Keranjang
+                        </button>
+                    </form>
                 </div>
+
             </div>
         </div>
         @empty
@@ -73,4 +83,4 @@
         @endforelse
     </div>
 </div>
-@endsection
+@endsection                      
