@@ -68,7 +68,7 @@
                         <span>Total:</span>
                         <span class="text-dark fw-bold">Rp {{ number_format($total, 0, ',', '.') }}</span>
                     </h5>
-                    <a href="#" class="btn btn-dark w-100 mt-3">Checkout</a>
+                    <a href="{{ route('checkout.index') }}" class="btn btn-dark w-100">Beli Obat</a>
                 </div>
             </div>
         </div>

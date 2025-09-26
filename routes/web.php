@@ -14,6 +14,9 @@ Route::get('/keranjang', [App\Http\Controllers\Frontend\KeranjangController::cla
 Route::post('/keranjang/tambah/{id}', [App\Http\Controllers\Frontend\KeranjangController::class, 'tambah'])->name('keranjang.tambah');
 Route::delete('/keranjang/hapus/{id}', [App\Http\Controllers\Frontend\KeranjangController::class, 'hapus'])->name('keranjang.hapus');
 
+Route::get('/beli', [App\Http\Controllers\Frontend\BeliController::class, 'index'])->name('beli.index');
+Route::post('/beli/store', [App\Http\Controllers\Frontend\BeliController::class, 'store'])->name('beli.store');
+
 
 Auth::routes([
     'register' => false,
