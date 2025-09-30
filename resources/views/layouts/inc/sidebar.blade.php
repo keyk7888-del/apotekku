@@ -54,7 +54,12 @@
             </a>
         </li>
 
-
+        <li class="menu-item">
+            <a href="{{ route('pesanan.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-truck"></i>
+                Pesanan
+            </a>
+        </li>
         <br>
 
         <li class="menu-item">

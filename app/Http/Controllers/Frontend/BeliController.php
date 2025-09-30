@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Pesanan;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class BeliController extends Controller
 {
@@ -33,6 +36,10 @@ class BeliController extends Controller
 
         $keranjang = session()->get('keranjang', []);
 
+        if (empty($keranjang)) {
+            return redirect()->route('beli.index')->with('error', 'Keranjang kosong!');
+        }
+
         $subtotal = 0;
         foreach ($keranjang as $item) {
             $subtotal += $item['harga'] * $item['jumlah'];
@@ -42,51 +49,58 @@ class BeliController extends Controller
         $total = $subtotal + $ongkir;
 
         // Generate nomor transaksi unik
-        $nomor_transaksi = 'TRX-' . strtoupper(uniqid());
+        $nomor_transaksi = 'TRX-' . strtoupper(Str::random(10));
 
-        // Tanggal transaksi
-        $tanggal_transaksi = now()->format('d-m-Y H:i');
+        // Simpan pesanan ke database
+        foreach ($keranjang as $item) {
+            Pesanan::create([
+                'nomor_transaksi'   => $nomor_transaksi,
+                'tanggal_transaksi' => Carbon::now(),
+                'nama_lengkap'      => $request->nama,
+                'nomor_telepon'     => $request->telepon,
+                'alamat_lengkap'    => $request->alamat,
+                'produk'            => $item['nama_obat'] ?? '-', // <-- aman walau tidak ada 'nama'
+                'harga'             => $item['harga'],
+                'jumlah'            => $item['jumlah'],
+                'subtotal'          => $item['harga'] * $item['jumlah'],
+                'metode_pembayaran' => $request->metode_pembayaran,
+            ]);
+        }
+
+        // Hapus keranjang setelah pesanan disimpan
+        session()->forget('keranjang');
 
         // Kirim data ke halaman konfirmasi
         return redirect()->route('beli.konfirmasi')->with([
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
-            'telepon' => $request->telepon,
+            'nama'              => $request->nama,
+            'alamat'            => $request->alamat,
+            'telepon'           => $request->telepon,
             'metode_pembayaran' => $request->metode_pembayaran,
-            'keranjang' => $keranjang,
-            'subtotal' => $subtotal,
-            'total' => $total,
-            'nomor_transaksi' => $nomor_transaksi,
-            'tanggal_transaksi' => $tanggal_transaksi,
+            'keranjang'         => $keranjang,
+            'subtotal'          => $subtotal,
+            'total'             => $total,
+            'nomor_transaksi'   => $nomor_transaksi,
+            'tanggal_transaksi' => Carbon::now()->format('d-m-Y H:i'),
         ]);
     }
 
     public function konfirmasi()
     {
-        // Ambil data dari session flash
-        $nama = session('nama');
-        $alamat = session('alamat');
-        $telepon = session('telepon');
-        $metode_pembayaran = session('metode_pembayaran');
-        $keranjang = session('keranjang', []);
-        $subtotal = session('subtotal', 0);
-        $total = session('total', 0);
-        $nomor_transaksi = session('nomor_transaksi');
-        $tanggal_transaksi = session('tanggal_transaksi');
+        // Pastikan ada data di session
+        if (!session()->has('nomor_transaksi')) {
+            return redirect()->route('beli.index');
+        }
 
-        // Setelah data tampil di view, keranjang bisa dikosongkan
-        session()->forget('keranjang');
-
-        return view('frontend.beli.konfirmasi', compact(
-            'nama',
-            'alamat',
-            'telepon',
-            'metode_pembayaran',
-            'keranjang',
-            'subtotal',
-            'total',
-            'nomor_transaksi',
-            'tanggal_transaksi'
-        ));
+        return view('frontend.beli.konfirmasi', [
+            'nama'              => session('nama'),
+            'alamat'            => session('alamat'),
+            'telepon'           => session('telepon'),
+            'metode_pembayaran' => session('metode_pembayaran'),
+            'keranjang'         => session('keranjang', []),
+            'subtotal'          => session('subtotal', 0),
+            'total'             => session('total', 0),
+            'nomor_transaksi'   => session('nomor_transaksi'),
+            'tanggal_transaksi' => session('tanggal_transaksi'),
+        ]);
     }
 }

@@ -42,6 +42,8 @@ Route::group([
 
     Route::resource('/transaksi', App\Http\Controllers\TransaksiController::class);
 
+    Route::resource('/pesanan', App\Http\Controllers\PesananController::class);
+
     Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
     Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
 });
