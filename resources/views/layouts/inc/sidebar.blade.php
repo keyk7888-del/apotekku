@@ -54,12 +54,6 @@
             </a>
         </li>
 
-        <li class="menu-item">
-            <a href="{{ route('transaksi.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-receipt"></i>
-                Transaksi
-            </a>
-        </li>
 
         <br>
 

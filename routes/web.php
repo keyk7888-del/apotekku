@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ObatShopController;
+use App\Http\Controllers\Frontend\PesananController;
 
 
 Route::get('/', [App\Http\Controllers\PelangganController::class, 'index'])->name('pelanggan.index');
@@ -16,7 +17,7 @@ Route::delete('/keranjang/hapus/{id}', [App\Http\Controllers\Frontend\KeranjangC
 
 Route::get('/beli', [App\Http\Controllers\Frontend\BeliController::class, 'index'])->name('beli.index');
 Route::post('/beli/store', [App\Http\Controllers\Frontend\BeliController::class, 'store'])->name('beli.store');
-
+Route::get('/konfirmasi-pesanan', [App\Http\Controllers\Frontend\BeliController::class, 'konfirmasi'])->name('beli.konfirmasi');
 
 Auth::routes([
     'register' => false,

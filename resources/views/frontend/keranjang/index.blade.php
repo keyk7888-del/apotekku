@@ -16,9 +16,9 @@
                 <thead class="table-light">
                     <tr>
                         <th class="text-center">Produk</th>
-                        <th class="text-center">Harga</th>
-                        <th class="text-center">Jumlah</th>
-                        <th class="text-center">Subtotal</th>
+                        <th>Harga</th>
+                        <th>Jumlah</th>
+                        <th>Subtotal</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -68,13 +68,13 @@
                         <span>Total:</span>
                         <span class="text-dark fw-bold">Rp {{ number_format($total, 0, ',', '.') }}</span>
                     </h5>
-                    <a href="{{ route('checkout.index') }}" class="btn btn-dark w-100">Beli Obat</a>
+                    <a href="{{ route('beli.index') }}" class="btn btn-dark w-100">Beli Obat</a>
                 </div>
             </div>
         </div>
     </div>
     @else
-        <p class="text-muted">Keranjang masih kosong.</p>
+        <p>Keranjang kosong. <a href="{{ route('obatshop.index') }}">Tambah obat sekarang</a>.</p>
     @endif
 </div>
 @endsection

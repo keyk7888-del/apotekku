@@ -23,5 +23,9 @@ class Pelanggan extends Model
         return $this->belongsTo(Pelanggan::class);
     }
 
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class);
+    }
 
 }
