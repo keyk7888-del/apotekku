@@ -54,6 +54,7 @@
                             <option value="Kapsul">Kapsul</option>
                             <option value="Sirup">Sirup</option>
                             <option value="Salep">Salep</option>
+                            <option value="Suppositoria">Suppositoria</option>
                             <option value="Injeksi">Injeksi</option>
                         </select>
                         @error('jenis')
@@ -102,15 +103,15 @@
                     </div>
 
                     <div class="flex">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="ti ti-send me-1"></span>
-                                Simpan
-                            </button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="ti ti-send me-1"></span>
+                            Simpan
+                        </button>
 
-                            <a href="{{ route('obat.index') }}" class="btn btn-secondary">
-                                Batal
-                            </a>
-                        </div>
+                        <a href="{{ route('obat.index') }}" class="btn btn-secondary">
+                            Batal
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>

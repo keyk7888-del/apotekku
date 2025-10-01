@@ -69,7 +69,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categories = Category::findOrFail($id);
+        return view('categories.edit', compact('categories'));
     }
 
     /**
@@ -78,25 +79,36 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama' => 'required|min:3|max:64',
             'deskripsi' => 'required',
             'foto' => 'nullable|image',
         ]);
+
+        // Ambil data category berdasarkan ID
+        $category = Category::findOrFail($id);
+
+        // Ambil data form kecuali foto (foto kita handle manual)
+        $data = $request->only(['nama','deskripsi']);
+
+        // Jika ada file foto baru
         if ($request->hasFile('foto')) {
             $images = $request->file('foto');
             $directory = 'images/';
             $filename = Str::random(10) . '.' . $images->getClientOriginalExtension();
+
+            // Simpan file ke storage
             Storage::putFileAs($directory, $images, $filename);
+
+            // Update kolom foto
             $data['foto'] = $filename;
         }
 
-        Category::create([
-            'nama' => $request->nama,
-            'deskripsi' => $request->deskripsi,
-            'foto' => $filename,   
-        ]);
-        return redirect()->route('category.index')->with('success', 'categories berhasil diupdate!');
+        // Update data kategori
+        $category->update($data);
+
+        return redirect()->route('category.index')->with('success', 'Kategori berhasil diupdate!');
     }
+
 
     /**
      * Remove the specified resource from storage.

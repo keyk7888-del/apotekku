@@ -92,29 +92,5 @@
         </div>
     </div>
 </div>
-
-<!-- ChartJS -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const ctx = document.getElementById('pesananChart');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: {!! json_encode($bulan) !!},
-            datasets: [{
-                label: 'Total Pesanan',
-                data: {!! json_encode($jumlah) !!},
-                borderWidth: 1,
-                backgroundColor: '#2196f3'
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
 @endsection
+

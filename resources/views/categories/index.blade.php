@@ -10,7 +10,7 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
-            <table class="table table-bordered table-striped table-hover text-center align-middle" id="kategoriTable">
+            <table class="table table-bordered table-striped table-hover table-sm text-center align-middle" id="kategoriTable">
                 <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari Kategori"><br>
                 <thead class="table-dark">
                     <tr>
@@ -40,8 +40,9 @@
                                 @endif
                             </td>
 
-                            <td>
+                            <td class="d-flex gap-2 justify-content-center">
                                 <a href="{{ route('category.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
+                                <a href="{{ route('category.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <a href="javascript:;" class="btn btn-sm btn-danger" onclick="actionDelete('{{ route('category.destroy', $item->id) }}')">
                                     <span class="ti ti-trash"></span>
                                 </a>
@@ -64,6 +65,35 @@
     <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}">
+
+    <style>
+        /* 🔽 Perkecil tabel */
+        #kategoriTable.table-sm td, 
+        #kategoriTable.table-sm th {
+            padding: 6px 10px !important; /* lebih rapat */
+            font-size: 13px;              /* font lebih kecil */
+            vertical-align: middle;       /* teks pas di tengah */
+        }
+
+        /* 🔽 Supaya tombol lebih kecil dan sejajar */
+        #kategoriTable .btn {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        /* 🔽 Header tabel biar rapi */
+        #kategoriTable thead th {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Hilangkan border bawah khusus kolom AKSI */
+        #kategoriTable th:last-child, 
+        #kategoriTable td:last-child {
+            border-bottom: none !important;
+        }
+
+    </style>
 @endpush
 
 @push('scripts')

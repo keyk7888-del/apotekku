@@ -9,7 +9,7 @@
 
     <div class="card shadow">
         <div class="card-body">
-            <table class="table table-bordered table-striped table-hover text-center align-middle" id="obatTable">
+            <table class="table table-bordered table-striped table-hover table-sm text-center align-middle" id="obatTable">
                 <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari Obat"><br>
                 <thead class="table-dark">
                     <tr>
@@ -62,6 +62,28 @@
     <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}">
+
+     <style>
+        /* 🔽 Perkecil tabel */
+        #obatTable.table-sm td, 
+        #obatTable.table-sm th {
+            padding: 6px 10px !important; /* lebih rapat */
+            font-size: 13px;              /* font lebih kecil */
+            vertical-align: middle;       /* teks pas di tengah */
+        }
+
+        /* 🔽 Supaya tombol lebih kecil dan sejajar */
+        #obatTable .btn {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        /* 🔽 Header tabel biar rapi */
+        #obatTable thead th {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
 @endpush
 
 @push('scripts')

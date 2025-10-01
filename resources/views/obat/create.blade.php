@@ -53,6 +53,7 @@
                             <option value="Kapsul">Kapsul</option>
                             <option value="Sirup">Sirup</option>
                             <option value="Salep">Salep</option>
+                            <option value="Suppositoria">Suppositoria</option>
                             <option value="Injeksi">Injeksi</option>
                         </select>
                         @error('jenis')
