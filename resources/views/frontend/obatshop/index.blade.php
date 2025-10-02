@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 @section('content')
 <div class="container" style="background-color: #bfd4d4; padding:20px;">
-    <h2 class="mb-4">Daftar Obat</h2>
+    <h2 class="mb-4 text-white">💊 Daftar Obat</h2>
 
     <!-- Filter Pencarian -->
     <form method="GET" action="{{ route('obatshop.index') }}" class="mb-4">
@@ -47,8 +47,7 @@
                 <div class="card-body">
                     <!-- Nama obat juga link -->
                     <h6 class="mt-2">
-                        <a href="{{ route('obatshop.show', $obat->id) }}" 
-                        class="text-dark text-decoration-none">
+                        <a href="{{ route('obatshop.show', $obat->id) }}" class="text-dark text-decoration-none">
                             {{ $obat->nama_obat }}
                         </a>
                     </h6>

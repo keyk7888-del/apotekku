@@ -17,23 +17,23 @@
             <table class="table table-borderless mb-4">
                 <tbody>
                     <tr>
-                        <td class="fw-bold" style="width: 200px;">Nomor Transaksi</td>
+                        <td class="fw-bold" style="width: 200px;">Nomor Transaksi :</td>
                         <td>{{ $nomor_transaksi }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Tanggal Transaksi</td>
+                        <td class="fw-bold">Tanggal Transaksi :</td>
                         <td>{{ $tanggal_transaksi }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Nama Lengkap</td>
+                        <td class="fw-bold">Nama Lengka :</td>
                         <td>{{ $nama }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Nomor Telepon</td>
+                        <td class="fw-bold">Nomor Telepon :</td>
                         <td>{{ $telepon }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Alamat Lengkap</td>
+                        <td class="fw-bold">Alamat Lengkap :</td>
                         <td>{{ $alamat }}</td>
                     </tr>
                 </tbody>

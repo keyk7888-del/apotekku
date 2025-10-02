@@ -21,7 +21,7 @@
                 @csrf
                 <div class="d-flex align-items-center mb-3">
                     <label class="me-2">Jumlah:</label>
-                    <input type="number" name="quantity" value="1" min="1" class="form-control w-25">
+                    <input type="number" name="jumlah" value="1" min="1" class="form-control w-25">
                 </div>
                 <button type="submit" class="btn btn-dark px-4"> + Tambah ke Keranjang</button>
             </form>

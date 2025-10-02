@@ -29,16 +29,21 @@ class KeranjangController extends Controller
     {
         $obat = Obat::findOrFail($id);
 
+        // Ambil jumlah dari input form
+        $jumlah = $request->input('jumlah', 1);
+
         $keranjang = session()->get('keranjang', []);
 
         if (isset($keranjang[$id])) {
-            $keranjang[$id]['jumlah']++;
+            // kalau obat sudah ada, tambahkan sesuai jumlah
+            $keranjang[$id]['jumlah'] += $jumlah;
         } else {
+            // kalau belum ada, simpan dengan jumlah yang dipilih
             $keranjang[$id] = [
-                "nama_obat"   => $obat->nama_obat,
-                "harga"  => $obat->harga,
-                "jumlah" => 1,
-                "foto"   => $obat->foto
+                "nama_obat" => $obat->nama_obat,
+                "harga"     => $obat->harga,
+                "jumlah"    => $jumlah,
+                "foto"      => $obat->foto
             ];
         }
 
@@ -46,6 +51,7 @@ class KeranjangController extends Controller
 
         return redirect()->route('keranjang.index')->with('success', 'Obat berhasil ditambahkan ke keranjang!');
     }
+
 
     public function hapus($id)
     {

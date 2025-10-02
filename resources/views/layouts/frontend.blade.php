@@ -26,9 +26,6 @@
           <li class="nav-item me-3">
             <a class="nav-link small" href="{{ url('/obatshop') }}">Obat Shop</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link small" href="{{ route('keranjang.index') }}">Keranjang Obat</a>
-          </li> 
         </ul>
       </div>
     </div>

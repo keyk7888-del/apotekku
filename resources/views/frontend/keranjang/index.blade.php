@@ -12,6 +12,13 @@
     <div class="row">
         <!-- Bagian daftar produk -->
         <div class="col-md-8">
+            <div class="mb-3">
+                <a href="{{ route('obatshop.index') }}" class="btn btn-outline-success">
+                    + Tambah Obat
+                </a>
+            </div>
+
+
             <table class="table align-middle">
                 <thead class="table-light">
                     <tr>
