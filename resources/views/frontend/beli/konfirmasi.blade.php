@@ -86,6 +86,11 @@
                 <a href="{{ route('obatshop.index') }}" class="btn btn-outline-secondary me-2">
                     ⬅ Kembali
                 </a>
+
+                <!-- Tombol menuju daftar pesanan -->
+                <a href="{{ route('pesananku.index') }}" class="btn btn-success">
+                    <i class="bi bi-receipt"></i> Lihat Pesanan Saya
+                </a>
             </div>
         </div>
     </div>

@@ -26,6 +26,9 @@
           <li class="nav-item me-3">
             <a class="nav-link small" href="{{ url('/obatshop') }}">Obat Shop</a>
           </li>
+          <li class="nav-item me-3">
+            <a class="nav-link small" href="{{ url('/pesananku') }}">Pesananku</a>
+          </li>
         </ul>
       </div>
     </div>

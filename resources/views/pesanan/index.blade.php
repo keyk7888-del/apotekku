@@ -31,9 +31,13 @@
                         <td>{{ $row->produk }}</td>
                         <td>{{ $row->metode_pembayaran }}</td>
                         <td>
-                            <a href="{{ route('pesanan.show', $row->id) }}" class="btn btn-info btn-sm">Detail</a>
-                            <a href="javascript:;" class="btn btn-sm btn-danger" onclick="actionDelete('{{ route('pesanan.destroy', $row->id) }}')">
-                                <span class="ti ti-trash"></span>
+                            <!-- Detail -->
+                            <a href="{{ route('pesanan.show', $row->id) }}" class="btn btn-sm" title="Detail">
+                                <i class="fas fa-eye text-purple"></i>
+                            </a>
+                            <!-- Hapus -->
+                            <a href="javascript:;" class="btn btn-sm" title="Hapus" onclick="actionDelete('{{ route('pesanan.destroy', $row->id) }}')">
+                                <i class="fas fa-trash text-red"></i>
                             </a>
                         </td>
                     </tr>
@@ -79,6 +83,9 @@
             text-align: center;
             vertical-align: middle;
         }
+
+        .text-purple { color: #7c7db6; } /* ungu untuk detail */
+        .text-red    { color: #B22222; } /* merah untuk hapus */
     </style>
 @endpush
 

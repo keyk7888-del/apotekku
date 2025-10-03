@@ -48,6 +48,8 @@ class BeliController extends Controller
         $ongkir = 0;
         $total = $subtotal + $ongkir;
 
+        session(['nama_lengkap' => $request->nama]);
+
         // Generate nomor transaksi unik
         $nomor_transaksi = 'TRX-' . strtoupper(Str::random(10));
 
@@ -103,4 +105,5 @@ class BeliController extends Controller
             'tanggal_transaksi' => session('tanggal_transaksi'),
         ]);
     }
+    
 }

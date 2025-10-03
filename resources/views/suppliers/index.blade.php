@@ -34,10 +34,19 @@
                         <td>{{ $item->alamat }}</td>
                         <td>{{ $item->keterangan }}</td>
                             <td>
-                                <a href="{{ route('suppliers.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
-                                <a href="{{ route('suppliers.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="javascript:;" class="btn btn-sm btn-danger" onclick="actionDelete('{{ route('suppliers.destroy', $item->id) }}')">
-                                    <span class="ti ti-trash"></span>
+                                <!-- Detail -->
+                                <a href="{{ route('suppliers.show', $item->id) }}" class="btn btn-sm" title="Detail">
+                                    <i class="fas fa-eye text-purple"></i>
+                                </a>
+
+                                <!-- Edit -->
+                                <a href="{{ route('suppliers.edit', $item->id) }}" class="btn btn-sm" title="Edit">
+                                    <i class="fas fa-edit text-green"></i>
+                                </a>
+
+                                <!-- Hapus -->
+                                <a href="javascript:;" class="btn btn-sm" title="Hapus" onclick="actionDelete('{{ route('suppliers.destroy', $item->id) }}')">
+                                    <i class="fas fa-trash text-red"></i>
                                 </a>
                             </td>
                         </tr>
@@ -57,6 +66,12 @@
     <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}">
+
+    <style>
+        .text-purple { color: #7c7db6; } /* ungu untuk detail */
+        .text-green  { color: #68be96; } /* hijau untuk edit */
+        .text-red    { color: #B22222; } /* merah untuk hapus */
+    </style>
 @endpush
 
 @push('scripts')

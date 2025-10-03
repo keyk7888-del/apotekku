@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container py-5" style="background-color: #bfd4d4;">
-    <h4 class="mb-4 fw-bold text-uppercase text-center">Pengiriman dan Pembayaran</h4>
+    <h4 class="mb-4 text-white text-uppercase text-center">📦Pengiriman dan Pembayaran💳</h4>
 
     <div class="row g-4">
         <!-- Form alamat -->
