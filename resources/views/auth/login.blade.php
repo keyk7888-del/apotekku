@@ -64,6 +64,11 @@
 
     <style>
       body {
+        background: url('{{ asset("images/bg.login.png") }}') no-repeat center center fixed;
+        background-size: cover;
+      }
+
+      body {
         background-color: #b5d1d6 !important; /* ungu pastel */
       }
       .card {
@@ -78,6 +83,17 @@
       .btn-primary:hover {
         background-color: #b5d1d6 !important;
         border-color: #8396a8 !important;
+      }
+      .btn-hitam-glossy {
+        background: linear-gradient(145deg, #000000, #2b2b2b);
+        color: #ffffff;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 10px 0;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
       }
     </style>
 
@@ -150,7 +166,7 @@
                   </div>
                 </div>
                 <div class="mb-6">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
+                  <button class="btn btn-hitam-glossy d-grid w-100" type="submit"><i class="fas fa-sign-in-alt me-2"></i> Login</button>
                 </div>
               </form>
             </div>

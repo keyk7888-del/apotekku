@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html> 
 <html lang="en" class="light-style layout-wide customizer-hide" dir="ltr"
   data-theme="theme-default" data-assets-path="{{ asset('/') }}"
   data-template="vertical-menu-template" data-style="light">
@@ -37,20 +37,52 @@
 
   <!-- Page CSS -->
   <link rel="stylesheet" href="{{ asset('/vendor/css/pages/page-auth.css') }}" />
+
+  <style>
+    body {
+      background: url('{{ asset("images/bg.apotek.png") }}') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .card {
+      background-color: #3498db !important; /* Biru */
+      color: white;
+      border-radius: 12px;
+    }
+    .form-label {
+      color: white;
+    }
+    .form-control {
+      background-color: #ffffff !important; /* putih bersih */
+      color: #000; /* teks hitam agar jelas */
+      border: 1px solid #ccc;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .form-control:focus {
+      background-color: #ffffff !important; /* tetap putih meski diklik */
+      color: #000; /* teks tetap hitam */
+      border-color: #ffffff; /* efek fokus biru */
+      box-shadow: 0 0 5px rgb(255, 255, 255); /* glow biru lembut */
+    }
+    .btn-primary {
+      background-color: #6b5b67;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #6b5b67;
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Navbar -->
-  
-  <!-- End Navbar -->
-
   <!-- Content -->
-  <div class="container-xxl">
-    <div class="row justify-content-center py-5">
+  <div class="container-xxl min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="row w-100 justify-content-center">
       <div class="col-md-7">
-        <div class="card card-body">
-          <h5 class="mb-0 fw-bold text-center">PELANGGAN</h5>
-          <hr />
+        <div class="card card-body shadow-lg">
+          <h5 class="mb-0 text-white text-center">SELAMAT DATANG DI APOTEKKU🤍</h5>
+          <h6 class="mb-0 text-white text-center">Silahkan Isi Data Pelanggan Untuk Melihat ApotekKu!</h6>
+          <hr class="border-light"/>
 
           <form action="{{ route('pelanggan.store') }}" method="post">
             @csrf
@@ -107,19 +139,5 @@
     </div>
   </div>
   <!-- / Content -->
-
-  <!-- Core JS -->
-  <script src="{{ asset('/vendor/libs/jquery/jquery.js') }}"></script>
-  <script src="{{ asset('/vendor/libs/popper/popper.js') }}"></script>
-  <script src="{{ asset('/vendor/js/bootstrap.js') }}"></script>
-  <script src="{{ asset('/vendor/libs/node-waves/node-waves.js') }}"></script>
-  <script src="{{ asset('/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
-  <script src="{{ asset('/vendor/libs/hammer/hammer.js') }}"></script>
-  <script src="{{ asset('/vendor/libs/i18n/i18n.js') }}"></script>
-  <script src="{{ asset('/vendor/libs/typeahead-js/typeahead.js') }}"></script>
-  <script src="{{ asset('/vendor/js/menu.js') }}"></script>
-
-  <!-- Main JS -->
-  <script src="{{ asset('/js/main.js') }}"></script>
 </body>
 </html>
