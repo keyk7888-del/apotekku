@@ -1,86 +1,123 @@
 @extends('layouts.app')
 @section('title', 'Detail Pesanan')
+
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="page-title">Detail Pesanan</h3>
-            <div class="card card-body p-0">
-                <table class="table table-striped">
-                    <tr>
-                        <th width="25%">ID</th>
-                        <td width="10px">:</td>
-                        <td>{{ $pesanan->id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Nomor Transaksi</th>
-                        <td>:</td>
-                        <td>{{ $pesanan->nomor_transaksi }}</td>
-                    </tr>
-                    <tr>
-                        <th>Tanggal Transaksi</th>
-                        <td>:</td>
-                        <td>{{ \Carbon\Carbon::parse($pesanan->tanggal_transaksi)->isoFormat('DD/MM/Y HH:mm') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Nama Lengkap</th>
-                        <td>:</td>
-                        <td>{{ $pesanan->nama_lengkap }}</td>
-                    </tr>
-                    <tr>
-                        <th>Nomor Telepon</th>
-                        <td>:</td>
-                        <td>{{ $pesanan->nomor_telepon }}</td>
-                    </tr>
-                    <tr>
-                        <th>Alamat Lengkap</th>
-                        <td>:</td>
-                        <td>{{ $pesanan->alamat_lengkap }}</td>
-                    </tr>
-                    <tr>
-                        <th>Produk</th>
-                        <td>:</td>
-                        <td>{{ $pesanan->produk }}</td>
-                    </tr>
-                    <tr>
-                        <th>Harga</th>
-                        <td>:</td>
-                        <td>Rp {{ number_format($pesanan->harga, 0, ',', '.') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Jumlah</th>
-                        <td>:</td>
-                        <td>{{ $pesanan->jumlah }}</td>
-                    </tr>
-                    <tr>
-                        <th>Subtotal</th>
-                        <td>:</td>
-                        <td>Rp {{ number_format($pesanan->subtotal, 0, ',', '.') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Metode Pembayaran</th>
-                        <td>:</td>
-                        <td>{{ $pesanan->metode_pembayaran }}</td>
-                    </tr>
-                    <tr>
-                        <th>Dibuat pada</th>
-                        <td>:</td>
-                        <td>{{ \Carbon\Carbon::parse($pesanan->created_at)->isoFormat('DD/MM/Y HH:mm') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Diperbarui pada</th>
-                        <td>:</td>
-                        <td>{{ \Carbon\Carbon::parse($pesanan->updated_at)->isoFormat('DD/MM/Y HH:mm') }}</td>
-                    </tr>
-                </table>
+<div class="container-fluid py-4" style="background: linear-gradient(135deg, #e3f2fd, #f8f9fa);">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <!-- Judul Tengah -->
+            <h3 class="text-center fw-bold text-primary mb-4">
+                📦 Detail Pesanan
+            </h3>
+
+            <!-- Card Transparan -->
+            <div class="card shadow-lg border-0 rounded-4" 
+                 style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(15px);">
+                <div class="card-body p-4">
+                    <table class="table table-borderless align-middle text-dark">
+                        <tbody>
+                            <tr>
+                                <th width="30%" class="text-secondary">ID</th>
+                                <td width="10px">:</td>
+                                <td>{{ $pesanan->id }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Nomor Transaksi</th>
+                                <td>:</td>
+                                <td>{{ $pesanan->nomor_transaksi }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Tanggal Transaksi</th>
+                                <td>:</td>
+                                <td>{{ \Carbon\Carbon::parse($pesanan->tanggal_transaksi)->timezone('Asia/Jakarta')->isoFormat('DD/MM/Y HH:mm') }} WIB</td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Nama Lengkap</th>
+                                <td>:</td>
+                                <td>{{ $pesanan->nama_lengkap }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Nomor Telepon</th>
+                                <td>:</td>
+                                <td>{{ $pesanan->nomor_telepon }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Alamat Lengkap</th>
+                                <td>:</td>
+                                <td>{{ $pesanan->alamat_lengkap }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Produk</th>
+                                <td>:</td>
+                                <td>{{ $pesanan->produk }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Harga</th>
+                                <td>:</td>
+                                <td>Rp {{ number_format($pesanan->harga, 0, ',', '.') }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Jumlah</th>
+                                <td>:</td>
+                                <td>{{ $pesanan->jumlah }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Subtotal</th>
+                                <td>:</td>
+                                <td>Rp {{ number_format($pesanan->subtotal, 0, ',', '.') }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Metode Pembayaran</th>
+                                <td>:</td>
+                                <td>
+                                    <span class="badge bg-success bg-opacity-75 px-3 py-2">
+                                        {{ strtoupper($pesanan->metode_pembayaran) }}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Dibuat Pada</th>
+                                <td>:</td>
+                                <td>{{ \Carbon\Carbon::parse($pesanan->created_at)->timezone('Asia/Jakarta')->isoFormat('DD/MM/Y HH:mm') }} WIB</td>
+                            </tr>
+                            <tr>
+                                <th class="text-secondary">Diperbarui Pada</th>
+                                <td>:</td>
+                                <td>{{ \Carbon\Carbon::parse($pesanan->updated_at)->timezone('Asia/Jakarta')->isoFormat('DD/MM/Y HH:mm') }} WIB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Tombol Bawah Tengah -->
+                <div class="card-footer text-center bg-transparent border-0">
+                    <a href="{{ route('pesanan.index') }}" 
+                       class="btn rounded-pill shadow-sm border border-primary bg-transparent text-primary px-4 mt-3">
+                        ⬅ Kembali ke Daftar Pesanan
+                    </a>
+                </div>
             </div>
 
-            <div class="d-flex gap-2 mt-3">
-                <a href="{{ route('pesanan.index') }}" class="btn btn-secondary">
-                    <span class="ti ti-arrow-left me-1"></span>
-                    Kembali
-                </a>
-
-            </div>
         </div>
     </div>
+</div>
+
+<style>
+    body {
+        background-color: #e3f2fd;
+    }
+    .table th, .table td {
+        color: #2c3e50;
+    }
+    .table tr:hover td {
+        background: rgba(255, 255, 255, 0.2) !important;
+    }
+    .btn {
+        transition: all 0.2s ease-in-out;
+    }
+    .btn:hover {
+        transform: scale(1.03);
+    }
+</style>
 @endsection

@@ -17,8 +17,8 @@ class ProfilController extends Controller
     {
         $request->validate([
             'nama'=>'required',
-            'email'=>'required|email|unique:user,email,' .Auth::user()->id,
-            'password'=>'confirned|min:8|nullable'
+            'email'=>'required|email|unique:users,email,' .Auth::user()->id,
+            'password'=>'confirmed|min:8|nullable'
         ]);
 
         $user = Auth::user();

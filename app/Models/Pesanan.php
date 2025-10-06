@@ -20,4 +20,16 @@ class Pesanan extends Model
         'subtotal',
         'metode_pembayaran',
     ];
+
+    // 🔹 Tambahkan relasi pelanggan
+    public function pelanggan()
+    {
+        return $this->belongsTo(Pelanggan::class, 'pelanggan_id');
+    }
+
+    public function obat()
+    {
+        return $this->belongsTo(Obat::class, 'obat_id');
+    }
+
 }

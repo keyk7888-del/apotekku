@@ -4,7 +4,6 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Data Admin</h3>
-        <a href="{{ route('admin.create') }}" class="btn btn-primary">Tambah Admin</a>
     </div>
 
     <div class="card shadow">

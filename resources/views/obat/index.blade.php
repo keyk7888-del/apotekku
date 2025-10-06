@@ -1,148 +1,144 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3>Data Obat</h3> 
-        <a href="{{ route('obat.create') }}" class="btn btn-primary">Tambah Obat</a>
-    </div>
+<div class="container-fluid py-4" style="background: linear-gradient(135deg, #e3f2fd, #f8f9fa);">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
 
-    <div class="card shadow">
-        <div class="card-body">
-            <table class="table table-bordered table-striped table-hover table-sm text-center align-middle" id="obatTable">
-                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari Obat"><br>
-                <thead class="table-dark">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Obat</th>
-                        <th>Kategori</th>
-                        <th>Supplier</th>
-                        <th>Kedaluwarsa</th>
-                        <th>Foto</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($obat as $item)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->nama_obat }}</td>
-                            <td>{{ $item->category->nama ?? '-' }}</td>
-                            <td>{{ $item->supplier->nama ?? '-' }}</td>
-                            <td>{{ $item->kedaluwarsa }}</td>
-                            <td>
-                                @if($item->foto)
-                                    <img src="{{ asset('storage/images/' . $item->foto) }}" alt="obat" width="70" class="rounded shadow-sm">
-                                @else
-                                    <span class="text-muted">Tidak Ada Foto</span>
-                                @endif
-                            </td>
-                            <td>
-                                <!-- Detail -->
-                                <a href="{{ route('obat.show', $item->id) }}" class="btn btn-sm" title="Detail">
-                                    <i class="fas fa-eye text-purple"></i>
-                                </a>
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="fw-bold text-primary">
+                    <i class="fas fa-pills me-2"></i> Data Obat
+                </h3>
+                <a href="{{ route('obat.create') }}" class="btn btn-primary rounded-pill shadow-sm px-4">
+                    <i class="fas fa-plus me-2"></i> Tambah Obat
+                </a>
+            </div>
 
-                                <!-- Edit -->
-                                <a href="{{ route('obat.edit', $item->id) }}" class="btn btn-sm" title="Edit">
-                                    <i class="fas fa-edit text-green"></i>
-                                </a>
+            <!-- Card -->
+            <div class="card shadow-lg border-0 rounded-4 bg-white bg-opacity-75 backdrop-blur">
+                <div class="card-body">
 
-                                <!-- Hapus -->
-                                <a href="javascript:;" class="btn btn-sm" title="Hapus" onclick="actionDelete('{{ route('obat.destroy', $item->id) }}')">
-                                    <i class="fas fa-trash text-red"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    <!-- 🔍 Pencarian -->
+                    <div class="mb-3 d-flex justify-content-end">
+                        <input type="text" id="searchInput" class="form-control w-50 shadow-sm rounded-pill" placeholder="🔍 Cari Obat...">
+                    </div>
+
+                    <!-- Tabel -->
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle text-center mb-0" id="obatTable">
+                            <thead class="table-primary text-white">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Obat</th>
+                                    <th>Kategori</th>
+                                    <th>Supplier</th>
+                                    <th>Kedaluwarsa</th>
+                                    <th>Foto</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($obat as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nama_obat }}</td>
+                                    <td>{{ $item->category->nama ?? '-' }}</td>
+                                    <td>{{ $item->supplier->nama ?? '-' }}</td>
+                                    <td>{{ $item->kedaluwarsa }}</td>
+                                    <td>
+                                        @if($item->foto)
+                                            <img src="{{ asset('storage/images/' . $item->foto) }}" 
+                                                 alt="obat" 
+                                                 width="60" 
+                                                 class="rounded-3 shadow-sm border border-light">
+                                        @else
+                                            <span class="text-muted fst-italic">Tidak Ada Foto</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <!-- Detail -->
+                                        <a href="{{ route('obat.show', $item->id) }}" 
+                                           class="btn btn-sm rounded-circle bg-light shadow-sm me-2" 
+                                           title="Detail">
+                                            <i class="fas fa-eye text-primary"></i>
+                                        </a>
+                                        <!-- Edit -->
+                                        <a href="{{ route('obat.edit', $item->id) }}" 
+                                           class="btn btn-sm rounded-circle bg-light shadow-sm me-2" 
+                                           title="Edit">
+                                            <i class="fas fa-edit text-success"></i>
+                                        </a>
+                                        <!-- Hapus -->
+                                        <a href="javascript:;" 
+                                           onclick="actionDelete('{{ route('obat.destroy', $item->id) }}')" 
+                                           class="btn btn-sm rounded-circle bg-light shadow-sm" 
+                                           title="Hapus">
+                                            <i class="fas fa-trash text-danger"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
 
+<!-- Form Hapus -->
 <form id="form-delete" action="" method="POST" class="d-none">
-        @csrf
-        @method('DELETE')
-    </form>
+    @csrf
+    @method('DELETE')
+</form>
 @endsection
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}">
-
-     <style>
-        /* 🔽 Perkecil tabel */
-        #obatTable.table-sm td, 
-        #obatTable.table-sm th {
-            padding: 6px 10px !important; /* lebih rapat */
-            font-size: 13px;              /* font lebih kecil */
-            vertical-align: middle;       /* teks pas di tengah */
-        }
-
-        /* 🔽 Supaya tombol lebih kecil dan sejajar */
-        #obatTable .btn {
-            padding: 4px 8px;
-            font-size: 12px;
-        }
-
-        /* 🔽 Header tabel biar rapi */
-        #obatTable thead th {
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .text-purple { color: #7c7db6; } /* ungu untuk detail */
-        .text-green  { color: #68be96; } /* hijau untuk edit */
-        .text-red    { color: #B22222; } /* merah untuk hapus */
-    </style>
-@endpush
-
 @push('scripts')
-    <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-     <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-    <script type="text/javascript">
-        $(function(){
-            $('.dataTable').DataTable();
+<script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+
+<script type="text/javascript">
+    // 🔍 Pencarian
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+        let value = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#obatTable tbody tr");
+        rows.forEach(function(row) {
+            let text = row.textContent.toLowerCase();
+            row.style.display = text.includes(value) ? "" : "none";
         });
+    });
 
-        function actionDelete(url){
-            Swal.fire({
-                title: "Apakah Kamu Yakin?",
-                text: "Kamu Tidak Dapat Mengembalikan Data Yang Telah Dihapus",
-                icon: "warning",
-                showCancelButton: true, 
-                confirmButtonText: "Ya Saya Yakin, Hapus!",
-            }).then((result)=>{
-                if (result.isConfirmed) {
-                    $('#form-delete').attr('action', url);
-                    $('#form-delete').submit();
-                }
-            });
-        }
-
-        // 🔍 Script Search Admin
-        document.getElementById("searchInput").addEventListener("keyup", function() {
-            let value = this.value.toLowerCase();
-            let rows = document.querySelectorAll("#obatTable tbody tr");
-            
-            rows.forEach(function(row) {
-                let text = row.textContent.toLowerCase();
-                row.style.display = text.includes(value) ? "" : "none";
-            });
-        });
-    </script>
-
-    @if(Session::has('success'))
-    <script type="text/javascript">
+    // ❌ Konfirmasi hapus data
+    function actionDelete(url){
         Swal.fire({
-            icon: 'success',
-            title: 'Berhasil',
-            text: '{{ Session::get('success') }}',
-            showConfirmButton: false,
-            timer: 1000
+            title: "Apakah Kamu Yakin?",
+            text: "Data yang dihapus tidak dapat dikembalikan.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya, Hapus!",
+            cancelButtonText: "Batal",
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#6c757d",
+        }).then((result)=>{
+            if (result.isConfirmed) {
+                $('#form-delete').attr('action', url);
+                $('#form-delete').submit();
+            }
         });
-    </script>
+    }
+
+    // ✅ Notifikasi Berhasil
+    @if(Session::has('success'))
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: '{{ Session::get('success') }}',
+        showConfirmButton: false,
+        timer: 1000
+    });
     @endif
+</script>
 @endpush

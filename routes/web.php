@@ -49,7 +49,7 @@ Route::group([
     Route::resource('/pesanan', App\Http\Controllers\PesananController::class);
 
     Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
-    Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
+    Route::put('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
 });
 
 

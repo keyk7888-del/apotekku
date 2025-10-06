@@ -11,6 +11,7 @@
 
                     <form action="{{ route('ubah-profil.update') }}" method="POST">
                         @csrf
+                        @method('PUT')
 
                         <div class="form-group mb-3">
                             <label for="name" class="form-label">Name</label>
@@ -28,14 +29,14 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="text" class="form-control" id="password" name="password" value="{{ $user->password }}">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password">
                             @error('password')
                                 <span class="invalid-feedback d-block"  role="alert"><strong>{{$message}}</strong></span>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
                             <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-                            <input type="text" class="form-control" id="password_confirmation" name="password_confirmation" value="{{ $user->password_confirmation }}">
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Ulangi password baru">
                         </div>
                         
                         <button type="submit" class="btn btn-primary">Simpan</button>
