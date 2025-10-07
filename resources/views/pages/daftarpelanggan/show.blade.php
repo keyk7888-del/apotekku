@@ -1,6 +1,5 @@
 @extends('layouts.app')
-
-@section('title', 'Daftar Tamu')
+@section('title', 'Detail Pelanggan')
 
 @section('content')
 <div class="container-fluid py-4" style="background: linear-gradient(135deg, #e3f2fd, #f8f9fa);">

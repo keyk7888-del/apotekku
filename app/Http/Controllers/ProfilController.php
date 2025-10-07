@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfilController extends Controller
 {
@@ -15,22 +16,25 @@ class ProfilController extends Controller
 
     public function update(Request $request)
     {
+        $user = Auth::user();
+
         $request->validate([
-            'nama'=>'required',
-            'email'=>'required|email|unique:users,email,' .Auth::user()->id,
-            'password'=>'confirmed|min:8|nullable'
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|confirmed|min:8',
         ]);
 
-        $user = Auth::user();
+        // Update data user
         $user->name = $request->name;
         $user->email = $request->email;
 
-        if ($request->password){
-         $user->password = bcrypt($request->password);
+        if (!empty($request->password)) {
+            $user->password = Hash::make($request->password);
         }
 
         $user->save();
-        
-        return redirect()->route('ubah-profil')->with('success', 'Profil Berhasil Diubah');
+
+        //Arahkan langsung ke halaman dashboard setelah update
+        return redirect()->route('dashboard')->with('success', 'Profil berhasil diperbarui!');
     }
 }

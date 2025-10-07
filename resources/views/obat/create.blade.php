@@ -1,119 +1,166 @@
 @extends('layouts.app')
+@section('title', 'Tambah Obat')
 
 @section('content')
-<div class="container py-4">
-    <h3 class="text-center text-primary mb-4">Tambah Obat</h3>
+<style>
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        max-width: 650px;
+        margin: 20px auto 50px auto;
+    }
 
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0" style="background-color: transparent;">
-                <div class="card-body">
-                    <form action="{{ route('obat.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
+    h3 {
+        text-align: center;
+        color: #7d5fff;
+        font-weight: 600;
+        margin-bottom: 25px;
+    }
 
-                        <div class="form-group mb-3">
-                            <label for="nama_obat" class="fw-bold">Nama Obat</label>
-                            <input type="text" name="nama_obat" id="nama_obat" class="form-control bg-transparent border-primary" />
-                            @error('nama_obat')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+    label {
+        font-weight: 500;
+        color: #555;
+    }
 
-                        <div class="form-group mb-3">
-                            <label for="category_id" class="fw-bold">Kategori</label>
-                            <select name="category_id" id="category_id" class="form-select bg-transparent border-primary">
-                                <option value="">Pilih Kategori</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->nama }}</option>
-                                @endforeach
-                            </select>
-                            @error('category_id')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+    .form-control, .form-select {
+        border: 2px solid #c6a9ff;
+        border-radius: 10px;
+        box-shadow: none;
+    }
 
-                        <div class="form-group mb-3">
-                            <label for="supplier_id" class="fw-bold">Supplier</label>
-                            <select name="supplier_id" id="supplier_id" class="form-select bg-transparent border-primary">
-                                <option value="">Pilih Supplier</option>
-                                @foreach ($suppliers as $supplier)
-                                    <option value="{{ $supplier->id }}">{{ $supplier->nama }}</option>
-                                @endforeach
-                            </select>
-                            @error('supplier_id')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+    .form-control:focus, .form-select:focus {
+        border-color: #7d5fff;
+        box-shadow: 0 0 5px rgba(125, 95, 255, 0.3);
+    }
 
-                        <div class="form-group mb-3">
-                            <label for="jenis" class="fw-bold">Jenis</label>
-                            <select name="jenis" id="jenis" class="form-select bg-transparent border-primary" required>
-                                <option value="">Pilih Jenis Obat</option>
-                                <option value="Tablet">Tablet</option>
-                                <option value="Kapsul">Kapsul</option>
-                                <option value="Sirup">Sirup</option>
-                                <option value="Salep">Salep</option>
-                                <option value="Suppositoria">Suppositoria</option>
-                                <option value="Injeksi">Injeksi</option>
-                            </select>
-                            @error('jenis')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+    .btn-primary {
+        background-color: #7d5fff;
+        border-color: #7d5fff;
+        border-radius: 10px;
+        font-weight: 500;
+    }
 
-                        <div class="form-group mb-3">
-                            <label for="deskripsi" class="fw-bold">Deskripsi</label>
-                            <input type="text" name="deskripsi" id="deskripsi" class="form-control bg-transparent border-primary" />
-                            @error('deskripsi')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+    .btn-primary:hover {
+        background-color: #6c4fe0;
+    }
 
-                        <div class="form-group mb-3">
-                            <label for="harga" class="fw-bold">Harga</label>
-                            <input type="number" name="harga" id="harga" class="form-control bg-transparent border-primary" />
-                            @error('harga')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+    .btn-outline-secondary {
+        border-radius: 10px;
+    }
+</style>
 
-                        <div class="form-group mb-3">
-                            <label for="stok_obat" class="fw-bold">Stok Obat</label>
-                            <input type="number" name="stok_obat" id="stok_obat" class="form-control bg-transparent border-primary" />
-                            @error('stok_obat')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+<div class="container-fluid py-4" style="background-color: #e3f2fd;">
+    <!-- Judul di luar form -->
+    <div class="text-center mb-4">
+        <h3>Tambah Obat</h3>
+    </div>
 
-                        <div class="form-group mb-3">
-                            <label for="kedaluwarsa" class="fw-bold">Kedaluwarsa</label>
-                            <input type="date" name="kedaluwarsa" id="kedaluwarsa" class="form-control bg-transparent border-primary" />
-                            @error('kedaluwarsa')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+    <div class="form-container">
+        <form action="{{ route('obat.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
 
-                        <div class="form-group mb-4">
-                            <label for="foto" class="fw-bold">Foto</label>
-                            <input type="file" name="foto" id="foto" class="form-control bg-transparent border-primary" />
-                            @error('foto')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-primary rounded-pill shadow-sm">
-                                <i class="fas fa-save me-1"></i> Simpan
-                            </button>
-
-                            <a href="{{ route('obat.index') }}" class="btn btn-outline-secondary rounded-pill shadow-sm">
-                                <i class="fas fa-times me-1"></i> Batal
-                            </a>
-                        </div>
-                    </form>
-                </div>
+            <div class="mb-3">
+                <label for="nama_obat" class="form-label">Nama Obat</label>
+                <input type="text" name="nama_obat" id="nama_obat" class="form-control" placeholder="Masukkan nama obat" required>
+                @error('nama_obat')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
             </div>
-        </div>
+
+            <div class="mb-3">
+                <label for="category_id" class="form-label">Kategori</label>
+                <select name="category_id" id="category_id" class="form-select" required>
+                    <option value="">Pilih Kategori</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->nama }}</option>
+                    @endforeach
+                </select>
+                @error('category_id')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="supplier_id" class="form-label">Supplier</label>
+                <select name="supplier_id" id="supplier_id" class="form-select" required>
+                    <option value="">Pilih Supplier</option>
+                    @foreach ($suppliers as $supplier)
+                        <option value="{{ $supplier->id }}">{{ $supplier->nama }}</option>
+                    @endforeach
+                </select>
+                @error('supplier_id')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="jenis" class="form-label">Jenis Obat</label>
+                <select name="jenis" id="jenis" class="form-select" required>
+                    <option value="">Pilih Jenis</option>
+                    <option value="Tablet">Tablet</option>
+                    <option value="Kapsul">Kapsul</option>
+                    <option value="Sirup">Sirup</option>
+                    <option value="Salep">Salep</option>
+                    <option value="Suppositoria">Suppositoria</option>
+                    <option value="Injeksi">Injeksi</option>
+                </select>
+                @error('jenis')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="deskripsi" class="form-label">Deskripsi</label>
+                <textarea name="deskripsi" id="deskripsi" class="form-control" rows="3" placeholder="Masukkan deskripsi obat"></textarea>
+                @error('deskripsi')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="harga" class="form-label">Harga</label>
+                <input type="number" name="harga" id="harga" class="form-control" placeholder="Masukkan harga obat" required>
+                @error('harga')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="stok_obat" class="form-label">Stok Obat</label>
+                <input type="number" name="stok_obat" id="stok_obat" class="form-control" placeholder="Masukkan jumlah stok" required>
+                @error('stok_obat')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="kedaluwarsa" class="form-label">Tanggal Kedaluwarsa</label>
+                <input type="date" name="kedaluwarsa" id="kedaluwarsa" class="form-control" required>
+                @error('kedaluwarsa')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="foto" class="form-label">Foto Obat</label>
+                <input type="file" name="foto" id="foto" class="form-control">
+                @error('foto')
+                    <span class="text-danger small">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn btn-primary rounded-pill shadow-sm">
+                    <i class="fas fa-save me-1"></i> Simpan
+                </button>
+
+                <a href="{{ route('obat.index') }}" class="btn btn-outline-secondary rounded-pill shadow-sm">
+                    <i class="fas fa-times me-1"></i> Batal
+                </a>
+            </div>
+        </form>
     </div>
 </div>
 @endsection

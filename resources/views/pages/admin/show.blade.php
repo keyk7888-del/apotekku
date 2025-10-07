@@ -50,9 +50,6 @@
                     <a href="{{ route('admin.index') }}" class="btn btn-outline-secondary rounded-pill shadow-sm">
                         <i class="fas fa-arrow-left me-1"></i> Kembali
                     </a>
-                    <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-primary rounded-pill shadow-sm">
-                        <i class="fas fa-edit me-1"></i> Edit
-                    </a>
                 </div>
             </div>
         </div>

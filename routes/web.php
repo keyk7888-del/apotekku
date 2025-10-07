@@ -1,27 +1,44 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Frontend\ObatShopController;
-use App\Http\Controllers\Frontend\PesananController;
+use App\Http\Controllers\Frontend\KeranjangController;
+use App\Http\Controllers\Frontend\BeliController;
 use App\Http\Controllers\Frontend\PesanankuController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DaftarPelangganController;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SuppliersController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ProfilController;
 
 
-Route::get('/', [App\Http\Controllers\PelangganController::class, 'index'])->name('pelanggan.index');
-Route::post('/', [App\Http\Controllers\PelangganController::class, 'store'])->name('pelanggan.store');
+Route::get('/', [PelangganController::class, 'index'])->name('pelanggan.index');
+Route::post('/', [PelangganController::class, 'store'])->name('pelanggan.store');
 
-Route::get('/obatshop', [App\Http\Controllers\Frontend\ObatShopController::class, 'index'])->name('obatshop.index');
-Route::get('/obatshop/{id}', [App\Http\Controllers\Frontend\ObatShopController::class, 'show'])->name('obatshop.show');
+// Obat shop
+Route::get('/obatshop', [ObatShopController::class, 'index'])->name('obatshop.index');
+Route::get('/obatshop/{id}', [ObatShopController::class, 'show'])->name('obatshop.show');
 
-Route::get('/keranjang', [App\Http\Controllers\Frontend\KeranjangController::class, 'index'])->name('keranjang.index');
-Route::post('/keranjang/tambah/{id}', [App\Http\Controllers\Frontend\KeranjangController::class, 'tambah'])->name('keranjang.tambah');
-Route::delete('/keranjang/hapus/{id}', [App\Http\Controllers\Frontend\KeranjangController::class, 'hapus'])->name('keranjang.hapus');
+// Keranjang
+Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
+Route::post('/keranjang/tambah/{id}', [KeranjangController::class, 'tambah'])->name('keranjang.tambah');
+Route::delete('/keranjang/hapus/{id}', [KeranjangController::class, 'hapus'])->name('keranjang.hapus');
 
-Route::get('/beli', [App\Http\Controllers\Frontend\BeliController::class, 'index'])->name('beli.index');
-Route::post('/beli/store', [App\Http\Controllers\Frontend\BeliController::class, 'store'])->name('beli.store');
-Route::get('/konfirmasi-pesanan', [App\Http\Controllers\Frontend\BeliController::class, 'konfirmasi'])->name('beli.konfirmasi');
+// Pembelian
+Route::get('/beli', [BeliController::class, 'index'])->name('beli.index');
+Route::post('/beli/store', [BeliController::class, 'store'])->name('beli.store');
+Route::get('/konfirmasi-pesanan', [BeliController::class, 'konfirmasi'])->name('beli.konfirmasi');
 
-Route::get('/pesananku', [App\Http\Controllers\Frontend\PesanankuController::class, 'index'])->name('pesananku.index');
-Route::get('/pesananku/{id}', [App\Http\Controllers\Frontend\PesanankuController::class, 'show'])->name('pesananku.show');
+// Pesananku
+Route::get('/pesananku', [PesanankuController::class, 'index'])->name('pesananku.index');
+Route::get('/pesananku/{id}', [PesanankuController::class, 'show'])->name('pesananku.show');
+
 
 Auth::routes([
     'register' => false,
@@ -30,33 +47,24 @@ Auth::routes([
     'confirm' => false,
 ]);
 
-Route::group([
-    'middleware' => ['auth']
-], function () {
-    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('/daftarpelanggan', App\Http\Controllers\DaftarPelangganController::class)->only('index','show','destroy');
+// route logout agar tombol logout bisa dipanggil
+Route::post('/logout', function () {Auth::logout();request()->session()->invalidate();request()->session()->regenerateToken();return redirect('/login');})->name('logout');
 
-    Route::resource('/obat', App\Http\Controllers\ObatController::class);
 
-    Route::resource('/category', \App\Http\Controllers\CategoryController::class);
+Route::middleware(['auth'])->group(function () {
+    // Dashboard utama
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::resource('/suppliers', \App\Http\Controllers\SuppliersController::class);
+    // Manajemen Data
+    Route::resource('/daftarpelanggan', DaftarPelangganController::class)->only(['index', 'show', 'destroy']);
+    Route::resource('/obat', ObatController::class);
+    Route::resource('/category', CategoryController::class);
+    Route::resource('/suppliers', SuppliersController::class);
+    Route::resource('/admin', AdminController::class);
+    Route::resource('/transaksi', TransaksiController::class);
+    Route::resource('/pesanan', PesananController::class);
 
-    Route::resource('/admin', App\Http\Controllers\AdminController::class);
-
-    Route::resource('/transaksi', App\Http\Controllers\TransaksiController::class);
-
-    Route::resource('/pesanan', App\Http\Controllers\PesananController::class);
-
+    // Profil
     Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
     Route::put('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
 });
-
-
-Auth::routes([
-    'register' => false,
-    'reset' => false,
-    'verify' => false,
-    'confirm' => false,
-]);
-

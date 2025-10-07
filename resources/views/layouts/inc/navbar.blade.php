@@ -7,8 +7,6 @@
     </div>
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-
-
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
             <!-- User -->
@@ -28,19 +26,25 @@
                             <i class="ti ti-user me-3 ti-md"></i><span class="align-middle">Ubah Profil</span>
                         </a>
                     </li>
+
                     <li>
                         <a class="dropdown-item" href="{{ route('admin.create') }}">
                             <i class="ti ti-user-plus me-3 ti-md"></i><span class="align-middle">Tambah Admin</span>
                         </a>
                     </li>
+
                     <li>
                         <div class="d-grid px-2 pt-2 pb-1">
-                            <a class="btn btn-sm btn-danger d-flex" onclick="$*('#logout')" href="javascript:void(0);">
+                            <a class="btn btn-sm btn-danger d-flex align-items-center justify-content-center"
+                                href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <small class="align-middle">Logout</small>
                                 <i class="ti ti-logout ms-2 ti-14px"></i>
                             </a>
 
-                            <form id="logout-form" method="POST" action="{{ route('logout') }}"></form>
+                            <form id="logout-form" method="POST" action="{{ route('logout') }}" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                     </li>
                 </ul>
@@ -51,8 +55,8 @@
 
     <!-- Search Small Screens -->
     <div class="navbar-search-wrapper search-input-wrapper d-none">
-        <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..."
-            aria-label="Search..." />
+        <input type="text" class="form-control search-input container-xxl border-0"
+            placeholder="Search..." aria-label="Search..." />
         <i class="ti ti-x search-toggler cursor-pointer"></i>
     </div>
 </nav>
